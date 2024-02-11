@@ -3,7 +3,7 @@ const today = new Date();
 ---
 
 <footer>
-  &copy; {today.getFullYear()} Kai's Soapbox. All rights reserved.
+  &copy; {today.getFullYear()} kai's soapbox. all rights reserved.
   <div class="social-links">
     <a href="https://ko-fi.com/kaisoapbox" target="_blank">
       <span class="sr-only">Support Kai on Ko-Fi</span>
@@ -85,7 +85,7 @@ const today = new Date();
 </footer>
 <style>
   footer {
-    padding: 2em 1em 6em 1em;
+    padding: 2em 1em 1em 1em;
     background: linear-gradient(var(--gray-gradient)) no-repeat;
     color: rgb(var(--gray));
     text-align: center;
@@ -99,8 +99,12 @@ const today = new Date();
   .social-links a {
     text-decoration: none;
     color: rgb(var(--gray));
+    transition:
+      scale 200ms,
+      color 200ms;
   }
   .social-links a:hover {
     color: rgb(var(--gray-dark));
+    scale: 110%;
   }
 </style>
