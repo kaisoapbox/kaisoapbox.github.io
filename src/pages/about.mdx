@@ -1,12 +1,16 @@
 ---
 title: "about"
 description: "a little about kai"
-pubDate: "Feb 09 2024"
-heroImage: "/kai_picrew.jpg"
-imageWidth: 250
-imageHeight: 250
 ---
 
+import BasePage from "../layouts/BasePage.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+
+<BasePage title={SITE_TITLE} description={SITE_DESCRIPTION}>
+
+<div style="text-align: center">
+  <img src="/kai_picrew.jpg" width="250" height="250"></img>
+</div>
 Hello there! I'm Kai, from 🇸🇬 and currently living in 🇨🇦, aspiring renaissance man. Former student of microbiology, and barely not a naval officer, though I spent over a year in officer school. At one point, I was a data scientist, then I was a software engineer, and now idk how to describe what I do now. Data guy at a Singapore startup, but also miscellaneous technical doer of things?
 
 I'm a massive nerd, and can't seem to shut the hell up. Instead of going to therapy or getting a romantic partner, I just [tweet about it instead][twitter]. You can blame my parents hehe :3
@@ -49,3 +53,5 @@ PS: Why the emoji 👑🧼📦? Well, it's me in emoji form! 凯, the Chinese ch
 
 [twitter]: https://twitter.com/kaisoapbox
 [kofi]: https://ko-fi.com/kaisoapbox
+
+</BasePage>
