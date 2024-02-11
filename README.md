@@ -6,6 +6,8 @@ This is the source code for [my personal static website](https://kaisoapbox.gith
 npm create astro@latest -- --template blog
 ```
 
+My old site was built with Jekyll, and you can check out the source code [here](https://github.com/kaisoapbox/old_jekyll_site).
+
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
