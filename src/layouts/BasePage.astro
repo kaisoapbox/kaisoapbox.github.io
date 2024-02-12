@@ -5,9 +5,24 @@ import Footer from "../components/Footer.astro";
 const { title, description } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="en" class="preload-transitions">
   <head>
     <BaseHead title={title} description={description} />
+    <style>
+      .preload-transitions * {
+        -webkit-transition: none !important;
+        -moz-transition: none !important;
+        -ms-transition: none !important;
+        -o-transition: none !important;
+        transition: none !important;
+      }
+    </style>
+    <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", function () {
+        let node = document.querySelector(".preload-transitions");
+        node.classList.remove("preload-transitions");
+      });
+    </script>
     <slot name="head" />
   </head>
   <body>
