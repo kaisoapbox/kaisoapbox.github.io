@@ -7,20 +7,6 @@ const { title, description } = Astro.props;
 
 <html lang="en" class="preload-transitions">
   <head>
-    <!-- Google analytics tag (gtag.js) -->
-    <script
-      type="text/partytown"
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-XXB89GEQCX"></script>
-    <script type="text/partytown">
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-XXB89GEQCX");
-    </script>
     <BaseHead title={title} description={description} />
     <style>
       .preload-transitions * {
@@ -45,5 +31,18 @@ const { title, description } = Astro.props;
       <slot />
     </main>
     <Footer />
+    <!-- 100% privacy-first analytics -->
+    <script
+      type="text/partytown"
+      async
+      defer
+      src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+    <noscript
+      ><img
+        src="https://queue.simpleanalyticscdn.com/noscript.gif"
+        alt=""
+        referrerpolicy="no-referrer-when-downgrade"
+      /></noscript
+    >
   </body>
 </html>
