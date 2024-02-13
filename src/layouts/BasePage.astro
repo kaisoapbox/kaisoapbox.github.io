@@ -7,6 +7,20 @@ const { title, description } = Astro.props;
 
 <html lang="en" class="preload-transitions">
   <head>
+    <!-- Google analytics tag (gtag.js) -->
+    <script
+      type="text/partytown"
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-YPVZ7XFRH9"></script>
+    <script type="text/partytown">
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-YPVZ7XFRH9");
+    </script>
     <BaseHead title={title} description={description} />
     <style>
       .preload-transitions * {
