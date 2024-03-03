@@ -5,10 +5,17 @@
 }
 
 #points {
-  margin-bottom: 0px;
+  margin-bottom: 0px !important;
+  margin-top: 0px;
+  margin-left: 8px;
 }
 
-h3 {
+p {
+  margin-top: 0px !important;
+  margin-bottom: 1em !important;
+}
+
+h4 {
   text-align: center;
 }
 

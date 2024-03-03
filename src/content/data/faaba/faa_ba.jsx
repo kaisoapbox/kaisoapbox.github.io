@@ -131,9 +131,13 @@ class Question extends React.Component {
 
   render() {
     return React.createElement(
-      "h1",
+      "div",
       null,
-      `${this.props.index + 1}. ${this.props.question["question"]}`,
+      React.createElement(
+        "h3",
+        null,
+        `${this.props.index + 1}. ${this.props.question["question"]}`
+      ),
       this.props.question["options"].map((option, index, allOptions) =>
         React.createElement(
           "div",
@@ -173,7 +177,7 @@ class Menu extends React.Component {
     return React.createElement(
       "div",
       null,
-      React.createElement("h1", null, "Menu"),
+      React.createElement("h3", null, "Menu"),
       React.createElement(
         "p",
         null,
@@ -329,7 +333,7 @@ class Quiz extends React.Component {
         "div",
         { id: "results-container" },
         React.createElement(
-          "h3",
+          "h4",
           null,
           "APPLICATION STATUS FOR ANNOUNCEMENT FAA-KAI-24-TRACEWG-69420"
         ),

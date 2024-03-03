@@ -2,20 +2,29 @@
 title: FAA Biographical Assessment
 pubDate: "Jan 30 2024"
 description: could you pass the FAA's Air Traffic Controller (ATC) biographical assessment?
-heroImage: '/faaba.png'
+heroImage: "/faaba.png"
 ---
 
 {/* wired elements are cute */}
-<script crossorigin type="module" src="https://unpkg.com/wired-elements?module"></script>
-{/* stylesheet */}
-<link rel="stylesheet" href="../data/faaba/faa_ba.css" />
-{/* icons */}
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet" />
 
-import Switcher from '../data/faaba/faa_ba.jsx';
+<script
+  crossorigin
+  type="module"
+  src="https://unpkg.com/wired-elements?module"
+></script>
+
+{/* icons */}
+
+<link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet"
+/>
+
+import "../data/faaba/faa_ba.css";
+import Switcher from "../data/faaba/faa_ba.jsx";
 
 <Switcher client:idle />
+
 ---
 
 # Acknowledgements
