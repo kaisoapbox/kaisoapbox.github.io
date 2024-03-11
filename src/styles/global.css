@@ -104,6 +104,17 @@ img {
   height: auto;
   border-radius: 8px;
 }
+details {
+  padding: 16px;
+  background-color: rgb(var(--gray-light));
+  border-radius: 8px;
+}
+details[open] {
+  padding-bottom: 0;
+  summary {
+    border-bottom: 1px solid rgb(var(--gray-dark));
+  }
+}
 code {
   padding: 2px 5px;
   background-color: rgb(var(--gray-light));
