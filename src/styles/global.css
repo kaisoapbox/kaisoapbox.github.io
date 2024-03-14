@@ -43,7 +43,7 @@ body {
   line-height: 1.7;
 }
 main {
-  width: 1080px;
+  width: 720px;
   max-width: calc(100% - 2em);
   margin: auto;
   padding: 3em 1em;
@@ -85,9 +85,6 @@ a:hover {
 }
 p {
   margin-bottom: 1em;
-}
-.prose p {
-  margin-bottom: 2em;
 }
 textarea {
   width: 100%;
@@ -136,6 +133,36 @@ blockquote {
 hr {
   border: none;
   border-top: 1px solid rgb(var(--gray-light));
+}
+.sidenote-left,
+.sidenote-right,
+.sidenote-sup {
+  display: none;
+}
+.sidenote-right,
+.sidenote-left {
+  padding: 1rem;
+  margin: 1.5rem, 0rem;
+}
+@media screen and (min-width: 1340px) {
+  .sidenote-sup {
+    display: inline;
+  }
+  .sidenote-left,
+  .sidenote-right {
+    width: 18rem;
+    margin-top: -3rem;
+    font-size: 0.85em;
+    line-height: 1.3rem;
+    position: absolute;
+    display: block;
+  }
+  .sidenote-right {
+    margin-left: 43rem;
+  }
+  .sidenote-left {
+    margin-left: -20rem;
+  }
 }
 @media (max-width: 720px) {
   h1 {

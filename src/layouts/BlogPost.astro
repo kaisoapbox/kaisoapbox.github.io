@@ -37,7 +37,7 @@ const {
       box-shadow: var(--box-shadow);
     }
     .prose {
-      width: 1080px;
+      width: 720px;
       max-width: calc(100% - 2em);
       margin: auto;
       padding: 1em;
@@ -61,18 +61,18 @@ const {
     }
   </style>
   <article>
-    <div class="hero-image">
-      {
-        heroImage && (
+    {
+      heroImage && (
+        <div class="hero-image">
           <img
             width={imageWidth || 1020}
             height={imageHeight || 510}
             src={heroImage}
             alt=""
           />
-        )
-      }
-    </div>
+        </div>
+      )
+    }
     <div class="prose">
       <div class="title">
         <div class="date">
