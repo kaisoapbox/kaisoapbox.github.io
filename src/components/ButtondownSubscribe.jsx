@@ -8,7 +8,9 @@ export default function Subscribe(props) {
       className="embeddable-buttondown-form"
     >
       <label htmlFor="bd-email">
-        Subscribe to my highly infrequent newsletter!
+        {props.cta
+          ? props.cta
+          : "Subscribe to my highly infrequent newsletter!"}
       </label>
       <div>
         <input
@@ -19,7 +21,7 @@ export default function Subscribe(props) {
         />
         <input type="submit" value="Subscribe" id="bd-submit" />
       </div>
-      <p class="buttondown-plug">
+      <p className="buttondown-plug">
         <a href="https://buttondown.email/refer/kaisoapbox" target="_blank">
           Powered by Buttondown.
         </a>

@@ -1,0 +1,57 @@
+---
+title: "Colophon"
+description: "How this site is made"
+updatedDate: "Mar 18 2024"
+---
+import BasePage from "../layouts/BasePage.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+
+<BasePage title={frontmatter.title} description={frontmatter.description}>
+# colophon
+<div>
+  *Last updated on <FormattedDate date={new Date(frontmatter.updatedDate)} />*
+</div>
+
+I like using fancy words, and upon first reading the word colophon, decided my site had to have one, solely because then I'd get to use the word more. Amusingly, the first proto-colophons were short and punchy, often expressions of relief that the tedious hand-copying of a manuscript was now over, presumably concluded with an overdramatic drop of the quill. "I have made an end at last, and my weary hand can rest." But as the printing press came to be, the term colophon was coined to refer to a little section describing the technical details of printed books. In the same spirit, websites have started to have colophons describing how the site is put together; [here](https://gwern.net/about#colophon) [are](https://joodaloop.com/colophon/) [three](https://maggieappleton.com/colophon). The [colophon Wikipedia page](https://en.wikipedia.org/wiki/Colophon_(publishing)) has plenty more interesting details.
+
+In the spirit of those first colophons, here's a pithy quote about how I treat this website, and my work in general. I leave inferring the philosophical meaning as an exercise to the reader.
+> The work is never finished. One must imagine Sisyphus happy.
+
+And now, true to my normal style, the rest that follows is a much wordier colophon describing everything else.
+
+## design
+Modern sites all look kinda same-y. For how the old web was kinda ugly, at least there was personality to it. Minimalism is elegant, simple, and kinda boring. But until I develop the design ability to make a more maximalist site feel non-garish, I'll have to keep it simple.
+
+I also kinda hate how all sites look and feel as if they were built for mobile first, then desktop second, what with the single column layout and excessively wide margins. Yes, the irony is not lost on me. 
+
+I stick to normal sentence-case for extended writing pieces (readability reasons), but for other things I prefer all-lowercase (save for the word 'I') for a more casual vibe.
+
+## technical stack
+This site is built using the [Astro](https://astro.build/) framework for static site generation, primarily using MDX for most content-driven pages and occasionally using [React](https://react.dev) components for some pages which have more interactivity. Astro is really nice for my purposes because while I can build some reusable components using JS, I can also ensure they compile down to non-interactive HTML for efficiency of load. I actively minimize the amount of JS I'm serving to improve page load speed, but I can't get rid of all of it — dark mode, for instance, virtually necessitates a little bit of client-side JS. No fancy CSS libraries here either, I'm using vanilla CSS, mostly for learning purposes.
+
+I also have a kofi button component which unfortunately does use client-side JS. I'll get rid of it soon and replace it with something which doesn't suck.
+
+Thus, while this site is not quite as fast and lightweight as some other personal websites (looking at you, [Judah](https://joodaloop.com)), it still does pretty well by my own standards.
+
+I use GitHub for version control and GitHub Pages for hosting, because it's free and I'm cheap. It's all [open-source](https://github.com/kaisoapbox/kaisoapbox.github.io) because I'm quirky like that. I use [Buttondown](https://buttondown.email/refer/kaisoapbox) for my email newsletter. 
+
+For analytics, I use Simple Analytics, but I'll be switching out from that shortly.
+
+Someday I'll get an actual domain, and this section will get a little more complicated. 
+
+## article features
+I tend to write the way I talk, which is somewhat of a tangent-laden ramble filled with off-hand wit, snark, and humour. The accessory features thus serve to supplement this. Sidenotes, click-to-expand aside blocks — all this because I don't want to write "properly". Sorry, Dr. Zag.
+
+### sidenotes
+The first implementation I tried for sidenotes was a simple JSX component which would take the content of the sidenote and put it in a `<span>`. While simple and functional, the underlying markdown feels awful, with a massive block of JSX in the middle of it. If the sidenote is meant to be an off-hand comment, embedding it in the middle of the text is cumbersome, and the JSX tags aren't much to look at either.
+
+So I rolled my own rehype plugin to parse normal markdown footnotes and turn them into sidenotes, [plugin code here](https://github.com/kaisoapbox/kaisoapbox.github.io/tree/main/src/plugins/sidenotes.js). No client-side JS, just some pre-processing at build time.
+
+When the screen is large enough, the sidenotes are shown, the footnotes section is hidden, and the footnote link refs are disabled. If not, then it just shows the footnotes normally. At some point I'll update it to have a click-to-expand element of some kind, hopefully also without needing client-side JS, and I can do away with the footnotes (except perhaps for screen-readers?).
+
+### aside blocks
+I'm just using a specially-styled `<details>` HTML element such that it once again requires no client-side JS.
+
+## typography
+Body text is set in [Lora](https://fonts.google.com/specimen/Lora), selected because I had [spent 5 hours](https://x.com/kaisoapbox/status/1769613412924035450?s=20) staring at fonts and just needed to *pick something already*. It feels less formal than, say, [EB Garamond](https://fonts.google.com/specimen/EB+Garamond), while maintaining some level of the pretension I associate with serifs. It's also fairly readable, which is good considering how lengthy my tirades can be. I also appreciate how the name is Lora, like [the technique for optimizing deep neural networks, LoRA](https://arxiv.org/abs/2106.09685).
+</BasePage>

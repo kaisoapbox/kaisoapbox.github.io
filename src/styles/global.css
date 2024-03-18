@@ -16,21 +16,24 @@
     0 8px 24px rgba(var(--gray), 33%), 0 16px 32px rgba(var(--gray), 33%);
 }
 @font-face {
-  font-family: "Atkinson";
-  src: url("/fonts/atkinson-regular.woff") format("woff");
-  font-weight: 400;
+  font-family: "Lora";
+  src: url("/fonts/Lora-VariableFont_wght.woff2") format("woff2");
+  font-weight: 400 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Atkinson";
-  src: url("/fonts/atkinson-bold.woff") format("woff");
-  font-weight: 700;
-  font-style: normal;
+  font-family: "Lora";
+  src: url("/fonts/Lora-Italic-VariableFont_wght.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: italic;
   font-display: swap;
 }
+* {
+  scroll-margin-top: 2rem;
+}
 body {
-  font-family: "Atkinson", sans-serif;
+  font-family: "Lora", serif;
   margin: 0;
   padding: 0;
   text-align: left;
@@ -79,6 +82,7 @@ b {
 }
 a {
   color: var(--accent);
+  text-decoration: none;
 }
 a:hover {
   color: var(--accent);
@@ -137,12 +141,12 @@ hr {
 .sidenote-left,
 .sidenote-right,
 .sidenote-sup {
+  line-height: 0;
   display: none;
 }
 .sidenote-right,
 .sidenote-left {
-  padding: 1rem;
-  margin: 1.5rem, 0rem;
+  padding-top: 1rem;
 }
 .embeddable-buttondown-form {
   text-align: center;
@@ -182,7 +186,7 @@ hr {
     font-size: 1rem;
   }
 }
-@media screen and (min-width: 1340px) {
+@media screen and (min-width: 1380px) {
   .sidenote-sup {
     display: inline;
   }
@@ -196,10 +200,17 @@ hr {
     display: block;
   }
   .sidenote-right {
-    margin-left: 43rem;
+    margin-left: 47rem;
   }
   .sidenote-left {
     margin-left: -20rem;
+  }
+  .footnote-ref {
+    pointer-events: none;
+    color: rgb(var(--gray-dark));
+  }
+  .footnotes {
+    display: none;
   }
 }
 @media (max-width: 720px) {
