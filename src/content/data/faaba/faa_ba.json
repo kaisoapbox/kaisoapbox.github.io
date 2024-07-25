@@ -130,7 +130,7 @@
     "weight": 0
   },
   {
-    "question": "The high school subject in which I received my lowest grades was:",
+    "question": "The high school subject in which I received my highest grades was:",
     "options": [
       {"description": "Science", "weight": 15},
       {"description": "Math", "weight": 0},
