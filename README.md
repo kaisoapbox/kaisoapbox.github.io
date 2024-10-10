@@ -1,6 +1,6 @@
 # README
 
-This is the source code for [my personal static website](https://kaisoapbox.github.io). I'm using Astro, based on their blog template:
+This is the source code for [my personal static website](https://kaisoapbox.com). I'm using Astro, based on their blog template:
 
 ```sh
 npm create astro@latest -- --template blog

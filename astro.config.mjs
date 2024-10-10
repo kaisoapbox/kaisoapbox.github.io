@@ -7,7 +7,7 @@ import { rehypeSidenotes } from "./src/plugins/sidenotes";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://kaisoapbox.github.io",
+  site: "https://kaisoapbox.com",
   integrations: [
     mdx({
       rehypePlugins: [[rehypeSidenotes]],

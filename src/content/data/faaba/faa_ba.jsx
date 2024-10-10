@@ -389,7 +389,7 @@ class Quiz extends React.Component {
                       pass ? " like" : ", unlike"
                     } me?\n`
                   ) +
-                  "&url=https://kaisoapbox.github.io/projects/faa_biographical_assessment"
+                  "&url=https://kaisoapbox.com/projects/faa_biographical_assessment"
               );
             },
           },
