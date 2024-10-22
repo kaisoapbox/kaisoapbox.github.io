@@ -31,14 +31,16 @@ const { title, description } = Astro.props;
       <slot />
     </main>
     <Footer />
-    <!-- 100% privacy-first analytics -->
+    <!-- use goatcounter for privacy-first analytics -->
     <script
       async="true"
       defer="true"
-      src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+      is:inline
+      data-goatcounter="https://kaisoapbox.goatcounter.com/count"
+      src="//gc.zgo.at/count.js"></script>
     <noscript
       ><img
-        src="https://queue.simpleanalyticscdn.com/noscript.gif"
+        src="https://kaisoapbox.goatcounter.com/count"
         alt=""
         referrerpolicy="no-referrer-when-downgrade"
       /></noscript
