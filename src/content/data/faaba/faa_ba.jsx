@@ -1,40 +1,16 @@
-import React from "react";
+import { useState, useRef, useEffect } from "react";
 
 import questions from "./faa_ba.json";
 
 const highlights = [
   {
     type: "text",
-    text: "These are real questions taken from the Federal Aviation Administration's Biographical Assessment.",
+    text: "These are real questions taken from the Federal Aviation Administration's Biographical Assessment. Introduced in 2014, this assessment decided whether aspiring Air Traffic Controllers would get the job.",
   },
   {
     type: "question",
-    question: 34,
-    text: "Some questions seem sensible, if not straightforward to game.",
-  },
-  {
-    type: "text",
-    text: "Introduced by the FAA in 2014, this assessment decided whether aspiring Air Traffic Controllers would get hired.",
-  },
-  {
-    type: "question",
-    question: 16,
-    text: "Other questions are tricker to get right.",
-  },
-  {
-    type: "text",
-    text: "Out of a possible 179 points, you needed 114 to pass.",
-  },
-  {
-    type: "question",
-    question: 14,
-    text: "If you simply answered A on everything, you'd get 113, just 1 point shy of a pass.",
-  },
-  { type: "text", text: "Sounds easy enough, right?" },
-  {
-    type: "question",
-    question: 15,
-    text: "There was a ~90% failure rate.",
+    question: 48,
+    text: "Many seemingly-relevant questions are actually worth 0 points, and are 'informational only'. Less than half of the questions actually counted at all.",
   },
   {
     type: "text",
@@ -42,17 +18,17 @@ const highlights = [
   },
   {
     type: "question",
-    question: 48,
-    text: "Many seemingly-relevant questions are actually worth 0 points, and are 'informational only'.",
+    question: 34,
+    text: "Some questions seemed sensible, if not straightforward to game.",
   },
   {
     type: "text",
-    text: "In fact, of the 62 questions, only 28 count for points. Less than half, but who's counting?",
+    text: "Out of a possible 179 points, you needed 114 to pass. That couldn't have been that hard, right?",
   },
   {
     type: "question",
-    question: 28,
-    text: "Of the questions that do count, the point allocations can often be oddly specific.",
+    question: 32,
+    text: "Well, many questions had some unusually specific point allocations.",
   },
   {
     type: "text",
@@ -60,17 +36,35 @@ const highlights = [
   },
   {
     type: "question",
-    question: 32,
-    text: "A subsequent internal FAA investigation cleared the NBCFAE and Snow of wrongdoing.",
+    question: 14,
+    text: "It was later revealed that if you would be able to pass if you answered A on all but one question.",
   },
   {
     type: "text",
-    text: "A class-action lawsuit, Brigida v. US DoT, alleging job discrimination on the FAA's part, has been filed before the District Court of DC since 2016. That's 8 years, but who's counting?",
+    text: "This test caught many ATC hopefuls by surprise, as the FAA implemented it suddenly and without warning, upending their existing ATC recruitment pipeline.",
+  },
+  {
+    type: "question",
+    question: 15,
+    text: "There was an ~85% failure rate.",
+  },
+  {
+    type: "text",
+    text: "After years of advocacy, Congress finally heard about the scandal, and in June 2015, demanded the FAA respond to the cheating allegations.",
+  },
+  {
+    type: "question",
+    question: 16,
+    text: "The subsequent FAA investigation cleared the NBCFAE and Snow of any wrongdoing.",
+  },
+  {
+    type: "text",
+    text: "A class-action lawsuit, Brigida v. US DoT, alleging job discrimination on the FAA's part, has been filed before the District Court of DC since 2016. That's 8 whole years!",
   },
   {
     type: "question",
     question: 6,
-    text: "The FAA has discontinued use of this Behavioural Assessment since 2018.",
+    text: "Congress passed an act overturning the use of this Biographical Assessment in 2016.",
   },
   {
     type: "text",
@@ -79,11 +73,11 @@ const highlights = [
   {
     type: "question",
     question: 18,
-    text: "A Nov 2023 report by the National Airspace System (NAS) Safety Review Team found the FAA has been struggling with hiring since 'before the mid-2000s'.",
+    text: "A Nov 2023 report by the National Airspace System (NAS) Safety Review Team found the FAA has been struggling with hiring since 'before the mid-2000s'. Unfortunately, ATC hiring is not a new problem, spanning many presidential administrations, both Democratic and Republican.",
   },
   {
     type: "text",
-    text: "So regardless of the outcome of the class-action lawsuit, there will still be too few ATCs at the FAA for the foreseeable future. I hope you like flight delays.",
+    text: "So regardless of the outcome of the class-action lawsuit, there will still be too few ATCs at the FAA for the foreseeable future. This means more flight delays and, unfortunately, more tragic crashes.",
   },
 ];
 
@@ -123,312 +117,299 @@ function randomAdmonishment() {
   return admonishments[random];
 }
 
-class Question extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { showWeight: false };
-  }
+function Question(props) {
+  const [showWeight, setShowWeight] = useState(false);
+  const [selected, setSelected] = useState(null);
 
-  render() {
-    return React.createElement(
-      "div",
-      null,
-      React.createElement(
-        "h3",
-        null,
-        `${this.props.index + 1}. ${this.props.question["question"]}`
-      ),
-      this.props.question["options"].map((option, index, allOptions) =>
-        React.createElement(
-          "div",
-          { id: "options-container" },
-          React.createElement(
-            "wired-button",
-            {
-              onClick: () => {
-                if (this.props.show) {
-                  this.setState(() => ({
-                    showWeight: true,
-                  }));
+  return (
+    <div className="question-parent" key={props.index}>
+      <h3 index={props.index + 1}>{props.question["question"]}</h3>
+      <div className="options-container">
+        {props.question["options"].map((option, index) => (
+          <div className="option-container" key={index}>
+            <button
+              onClick={() => {
+                if (props.show) {
+                  setShowWeight(true);
                 }
-                this.props.handleClick(option, allOptions);
-              },
-            },
-            `${String.fromCharCode(65 + index)}. ${option["description"]}`
-          ),
-          this.state.showWeight &&
-            React.createElement(
-              "p",
-              { id: "points" },
-              option["weight"] === 0 ? 0 : `+${option["weight"]}`
-            )
-        )
-      )
-    );
-  }
+                setSelected(index);
+                props.handleClick(option);
+              }}
+              disabled={showWeight}
+              className={index === selected ? "selected" : ""}
+            >
+              <p option={String.fromCharCode(65 + index)}>
+                {option["description"]}
+              </p>
+            </button>
+            <p className={`points${showWeight ? " show" : ""}`}>
+              {option["weight"] === 0 ? 0 : `+${option["weight"]}`}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
-class Menu extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return React.createElement(
-      "div",
-      null,
-      React.createElement("h3", null, "Menu"),
-      React.createElement(
-        "p",
-        null,
-        "Find out whether you have what it takes to become an FAA Air Traffic Controller!"
-      ),
-      React.createElement(
-        "p",
-        null,
-        "If you don't know what this is about, I suggest starting with just the selected questions to get a feel for what to expect."
-      ),
-      React.createElement(
-        "wired-button",
-        {
-          onClick: () => {
-            this.props.setSelected("Highlights");
-          },
-        },
-        "Selected Questions + Commentary"
-      ),
-      React.createElement(
-        "wired-button",
-        {
-          onClick: () => {
-            this.props.setSelected("Quiz");
-          },
-        },
-        "Whole Assessment (62 questions)"
-      )
-    );
-  }
+function Menu(props) {
+  return (
+    <>
+      <h2 style={{ textAlign: "center" }}>Menu</h2>
+      <p>
+        Find out whether you have what it takes to become an FAA Air Traffic
+        Controller!
+      </p>
+      <p>
+        If you don't know what this is about, I suggest starting with just the
+        selected questions to get a feel for what to expect.
+      </p>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
+        <button
+          onClick={() => {
+            props.setSelected("Highlights");
+          }}
+          style={{ marginBottom: "1.5em", textAlign: "center" }}
+        >
+          Selected Questions + Commentary
+        </button>
+        <button
+          style={{ textAlign: "center" }}
+          onClick={() => {
+            props.setSelected("Quiz");
+          }}
+        >
+          Whole Assessment (62 questions)
+        </button>
+      </div>
+    </>
+  );
 }
 
-class Highlights extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { index: 0, show: true };
+function Highlights(props) {
+  const [index, setIndex] = useState(0);
+  const [show, setShow] = useState(true);
 
-    this.handleContinue = this.handleContinue.bind(this);
-    this.handleQuestionClick = this.handleQuestionClick.bind(this);
+  function handleContinue() {
+    setShow(
+      index + 1 === highlights.length
+        ? true
+        : highlights[index + 1]["type"] === "text"
+    );
+    setIndex(index + 1);
   }
 
-  handleContinue() {
-    this.setState((prevState) => ({
-      index: prevState.index + 1,
-      show:
-        prevState.index + 1 === highlights.length
-          ? true
-          : highlights[prevState.index + 1]["type"] === "text",
-    }));
+  function handleQuestionClick() {
+    setShow(true);
   }
 
-  handleQuestionClick(option, allOptions) {
-    this.setState((prevState) => ({ show: true }));
-  }
-
-  render() {
-    if (this.state.index === highlights.length) {
-      return React.createElement(
-        "div",
-        null,
-        React.createElement(
-          "p",
-          null,
-          "Now why not take the entire questionnaire?"
-        ),
-        React.createElement(
-          "wired-button",
-          {
-            onClick: () => {
-              this.props.setSelected("Quiz");
-            },
-          },
-          "Whole assessment (62 questions)"
-        ),
-        React.createElement(
-          "wired-button",
-          {
-            onClick: () => {
-              this.props.setSelected("Menu");
-            },
-          },
-          "Return to Menu"
-        )
-      );
-    }
-    return React.createElement(
-      "div",
-      null,
-      highlights[this.state.index]["type"] === "question"
-        ? React.createElement(Question, {
-            index: highlights[this.state.index]["question"],
-            question: questions[highlights[this.state.index]["question"]],
-            handleClick: this.handleQuestionClick,
-            show: true,
-          })
-        : null,
-      this.state.show &&
-        React.createElement("p", null, highlights[this.state.index]["text"]),
-      this.state.show &&
-        React.createElement(
-          "wired-button",
-          {
-            onClick: this.handleContinue,
-          },
-          "continue"
-        )
+  if (index === highlights.length) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "1em",
+          alignItems: "center",
+        }}
+      >
+        <p style={{ marginBottom: "0px" }}>
+          Now why not take the entire questionnaire?
+        </p>
+        <button
+          className="center"
+          onClick={() => {
+            props.setSelected("Quiz");
+          }}
+        >
+          Whole Assessment (62 questions)
+        </button>
+        <button
+          className="center"
+          onClick={() => {
+            props.setSelected("Menu");
+          }}
+        >
+          Return to Menu
+        </button>
+      </div>
     );
   }
+  return (
+    <>
+      {highlights[index]["type"] === "question" && (
+        <Question
+          index={highlights[index]["question"]}
+          question={questions[highlights[index]["question"]]}
+          handleClick={handleQuestionClick}
+          show={true}
+        />
+      )}
+      {show && (
+        <div className="card">
+          <p>{highlights[index]["text"]}</p>
+        </div>
+      )}
+      {show && (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <button style={{ marginBottom: "0.5em" }} onClick={handleContinue}>
+            Continue
+          </button>
+        </div>
+      )}
+    </>
+  );
 }
 
-class Quiz extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      index: 0,
-      score: 0,
-      maxScore: 0,
-      statusText:
-        "Do you have what it takes to become an ATC? You need 114 points to pass.",
-    };
+function Quiz(props) {
+  const [answered, setAnswered] = useState(0);
+  const [score, setScore] = useState(0);
+  const [showResults, setShowResults] = useState(false);
+  const myRef = useRef(null);
 
-    this.handleClick = this.handleClick.bind(this);
+  useEffect(() => {
+    myRef.current && myRef.current.scrollIntoView(true);
+  }, [showResults]);
+
+  function handleClick(option) {
+    setScore(score + option["weight"]);
+    setAnswered(answered + 1);
   }
 
-  handleClick(option, allOptions) {
-    let nextStatus = "That question was worth no points and didn't matter.";
-    let bestWeight = 0;
-    allOptions.forEach((_option, _index) => {
-      if (_option["weight"] > bestWeight) {
-        bestWeight = _option["weight"];
-        nextStatus =
-          bestWeight === option["weight"]
-            ? `You picked the best option, worth ${
-                _option["weight"]
-              } points! ${randomCompliment()}`
-            : `The best option was '${String.fromCharCode(65 + _index)}. ${
-                _option["description"]
-              }', worth ${_option["weight"]} points. ${randomAdmonishment()}`;
-      }
-    });
-    this.setState((prevState) => ({
-      score: prevState.score + option["weight"],
-      maxScore: prevState.maxScore + bestWeight,
-      index: prevState.index + 1,
-      statusText: nextStatus,
-    }));
-  }
+  if (showResults) {
+    const pass = score >= 114;
 
-  render() {
-    if (this.state.index === questions.length) {
-      const pass = this.state.score >= 114;
-      return React.createElement(
-        "div",
-        { id: "results-container" },
-        React.createElement(
-          "h4",
-          null,
-          "APPLICATION STATUS FOR ANNOUNCEMENT FAA-KAI-24-TRACEWG-69420"
-        ),
-        React.createElement(
-          "p",
-          { id: "center" },
-          `Score: ${this.state.score}/${this.state.maxScore}`
-        ),
-        React.createElement(
-          "wired-icon-button",
-          { id: "center", class: pass ? "pass" : "fail" },
-          React.createElement(
-            "span",
-            { class: "material-icons" },
-            pass ? "done" : "close"
-          )
-        ),
-        React.createElement(
-          "p",
-          null,
-          `Thank you for submitting your application for announcement FAA-KAI-24-TRACEWG-69420. Based upon your responses to the Biographical Assessment, we have determined that you ${
-            pass ? "ARE" : "are NOT"
-          } eligible for this position as a part of the current vacancy announcement.`
-        ),
-        React.createElement(
-          "p",
-          null,
-          'The biographical assessment measures ATCS job applicant characteristics that have been "shown empirically" to "predict success" as an air traffic controller in the FAA. These characteristics include factors such as prior general and ATC-specific work experience, education and training, work habits, academic and other achievements, and life experiences among other factors. This biographical assessment was "independently validated" by "outside experts".'
-        ),
-        React.createElement(
-          "p",
-          null,
-          "Many candidates applied for this totally legitimate position and unfortunately we have fewer job openings (0) than there were candidates. We encourage you to apply to future vacancy announcements. Thank you again for your interest in the Federal Aviation Administration."
-        ),
-        React.createElement(
-          "p",
-          null,
-          "If you would like further information, please make your request in writing to kaisoapbox [at] gmail.com with the title 'FAA Biographical Assessment'."
-        ),
-        React.createElement(
-          "wired-button",
-          {
-            id: "center",
-            onClick: () => {
+    return (
+      <div ref={myRef} id="results-container">
+        <h4>APPLICATION STATUS FOR ANNOUNCEMENT FAA-KAI-24-TRACEWG-69420</h4>
+        <p className="score">Score: {score}/179</p>
+        <wired-icon-button class={pass ? "center pass" : "center fail"}>
+          <span className="material-icons">{pass ? "done" : "close"}</span>
+        </wired-icon-button>
+        <p>
+          Thank you for submitting your application for announcement
+          FAA-KAI-24-TRACEWG-69420. Based upon your responses to the
+          Biographical Assessment, we have determined that you
+          {pass ? " ARE" : " are NOT"} eligible for this position as a part of
+          the current vacancy announcement.
+        </p>
+        <p>
+          The biographical assessment measures ATCS job applicant
+          characteristics that have been "shown empirically" to "predict
+          success" as an air traffic controller in the FAA. These
+          characteristics include factors such as prior general and ATC-specific
+          work experience, education and training, work habits, academic and
+          other achievements, and life experiences among other factors. This
+          biographical assessment was "independently validated" by "outside
+          experts".
+        </p>
+        <p>
+          Many candidates applied for this totally legitimate position and
+          unfortunately we have fewer job openings (0) than there were
+          candidates. We encourage you to apply to future vacancy announcements.
+          Thank you again for your interest in the Federal Aviation
+          Administration.
+        </p>
+        <p>
+          If you would like further information, please make your request in
+          writing to kai[at]kaisoapbox.com with the title 'FAA Biographical
+          Assessment'.
+        </p>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <button
+            className="center"
+            style={{ marginBottom: "1em" }}
+            onClick={() => {
               window.open(
                 "https://twitter.com/intent/tweet?text=" +
                   encodeURIComponent(
                     `I ${
                       pass ? "PASSED" : "FAILED"
-                    } the 2014 FAA Biographical Assessment with a score of ${
-                      this.state.score
-                    }. Do you have what it takes to become an ATC${
+                    } the 2014 FAA Biographical Assessment with a score of ${score}. Do you have what it takes to become an ATC${
                       pass ? " like" : ", unlike"
                     } me?\n`
                   ) +
                   "&url=https://kaisoapbox.com/projects/faa_biographical_assessment"
               );
-            },
-          },
-          "Share your score on Twitter (X)"
-        ),
-        React.createElement(
-          "wired-button",
-          {
-            onClick: () => {
-              this.props.setSelected("Menu");
-            },
-            id: "center",
-          },
-          "Return to Menu"
-        )
-      );
-    }
-    return React.createElement(
-      "div",
-      { id: "container" },
-      React.createElement("p", null, this.state.statusText),
-      React.createElement(
-        "p",
-        null,
-        `Score: ${this.state.score}/${this.state.maxScore}`
-      ),
-      React.createElement(Question, {
-        index: this.state.index,
-        question: questions[this.state.index],
-        handleClick: this.handleClick,
-        show: false,
-      })
+            }}
+          >
+            Share your score on Twitter (X)
+          </button>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <button
+            onClick={() => {
+              props.setSelected("Menu");
+            }}
+            style={{ marginBottom: "2em" }}
+            className="center"
+          >
+            Return to Menu
+          </button>
+        </div>
+      </div>
     );
   }
+  return (
+    <div ref={myRef} className="quiz">
+      <div className="fade"></div>
+      <h2 className="center">FAA Biographical Assessment</h2>
+      <p className="score">Score: {score}/179</p>
+      {questions.map((question, index) => (
+        <Question
+          key={index}
+          index={index}
+          question={question}
+          handleClick={handleClick}
+          show={true}
+        />
+      ))}
+
+      <button
+        disabled={answered < 62}
+        className="results"
+        onClick={setShowResults}
+      >
+        Show Results
+      </button>
+    </div>
+  );
 }
 
 export default function Switcher() {
   const componentsMap = { Menu, Highlights, Quiz };
-  const [selected, setSelected] = React.useState("Menu");
+  const [selected, setSelected] = useState("Menu");
   const DynamicComponent = componentsMap[selected];
-  return <DynamicComponent setSelected={setSelected} />;
+  const scrollRef = useRef(null);
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView(true);
+  }, [selected]);
+
+  return (
+    <div ref={scrollRef} id="top">
+      <div
+        id="watermark"
+        className={selected === "Quiz" ? "watermarkFloat" : "watermark"}
+      >
+        Made with ❤️ by{" "}
+        <a target="_blank" href="https://x.com/kaisoapbox">
+          @kaisoapbox
+        </a>
+      </div>
+      <DynamicComponent setSelected={setSelected} />
+    </div>
+  );
 }
