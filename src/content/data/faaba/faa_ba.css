@@ -189,7 +189,7 @@ button:disabled {
     color: darkslategray;
     font-size: 0.8em;
     position: sticky;
-    top: calc(100vh - 3em);
+    top: calc(100dvh - 3em);
     box-shadow: 0px 2px 10px 10px aliceblue;
     z-index: 1;
   }
@@ -225,6 +225,6 @@ button:disabled {
   .watermarkFloat {
     margin-left: -2.5em !important;
     margin-right: auto !important;
-    top: calc(100vh - 7em) !important;
+    top: calc(100dvh - 7em) !important;
   }
 }
