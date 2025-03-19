@@ -21,5 +21,5 @@ As before, [open source](https://github.com/kaisoapbox/WhisperJournal). I may un
 Also on the Play Store. Not on the App Store yet, but when I get around to throwing money at Apple, I'll do it.
 
 <a href="https://play.google.com/store/apps/details?id=com.kaizoco.whisperjournal">
-<img src="https://cdn.rawgit.com/steverichey/google-play-badge-svg/master/img/en_get.svg" width="25%">
+  <img src="https://cdn.rawgit.com/steverichey/google-play-badge-svg/master/img/en_get.svg" width="25%">
 </a>

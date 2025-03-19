@@ -20,7 +20,11 @@ const {
 } = Astro.props;
 ---
 
-<BasePage title={title} description={description}>
+<BasePage
+  title={title}
+  description={description}
+  image={heroImage || "/blog-placeholder-2.jpg"}
+>
   <style slot="head">
     main {
       width: calc(100% - 2em);
@@ -35,6 +39,8 @@ const {
       margin: 0 auto;
       border-radius: 12px;
       box-shadow: var(--box-shadow);
+      max-height: 50vh;
+      width: auto;
     }
     .prose {
       width: 720px;
