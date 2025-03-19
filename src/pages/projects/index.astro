@@ -36,7 +36,9 @@ const posts = (await getCollection("projects")).sort(
       text-align: center;
     }
     ul li:first-child img {
-      width: 100%;
+      width: auto;
+      max-height: 50vh;
+      max-width: 100%;
     }
     ul li:first-child .title {
       font-size: 2.369rem;
