@@ -1,0 +1,59 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"video"> {
+  url: string;
+  playOnVisible: boolean;
+}
+
+const { url, playOnVisible, autoplay, ...attr } = Astro.props;
+---
+
+<video
+  class="mpd-video"
+  data-url={url}
+  data-play-on-visible={playOnVisible}
+  data-autoplay={autoplay}
+  {...attr}></video>
+<script>
+  import * as dashjs from "dashjs";
+
+  const videos = document.querySelectorAll<HTMLVideoElement>("video.mpd-video");
+  videos.forEach((video) => {
+    const player = dashjs.MediaPlayer().create();
+
+    player.initialize(
+      video,
+      video.dataset.url,
+      Boolean(video.dataset.autoplay || video.dataset.autoplay === "") &&
+        !(video.dataset.playOnVisible || video.dataset.playOnVisible === "")
+    );
+    player.preload();
+
+    if (video.dataset.playOnVisible || video.dataset.playOnVisible === "") {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              player.play();
+            } else {
+              player.pause();
+            }
+          });
+        },
+        {
+          threshold: 0.75,
+        }
+      );
+
+      observer.observe(video);
+    }
+
+    if (video.loop) {
+      player.on(dashjs.MediaPlayer.events.PLAYBACK_ENDED, () => {
+        player.seek(0);
+        player.play();
+      });
+    }
+  });
+</script>

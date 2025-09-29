@@ -57,7 +57,7 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0 0 0.5rem 0;
+  margin: 0.5rem 0 0.5rem 0;
   color: rgb(var(--black));
   line-height: 1.2;
 }
@@ -100,7 +100,8 @@ input {
 table {
   width: 100%;
 }
-img {
+img,
+video {
   max-width: 100%;
   height: auto;
   border-radius: 8px;
@@ -109,9 +110,15 @@ details {
   padding: 16px;
   background-color: rgb(var(--gray-light));
   border-radius: 8px;
+  margin-bottom: 8px;
 }
 details[open] {
-  padding-bottom: 0;
+  p,
+  ul,
+  ol {
+    margin-top: 8px;
+    margin-bottom: 0px;
+  }
   summary {
     border-bottom: 1px solid rgb(var(--gray-dark));
   }

@@ -1,12 +1,269 @@
 ---
 title: Orbital Flush
 pubDate: "Mar 19 2025"
-description: a toilet that flushes whenever an astronaut aboard the International Space Station flushes, mounted on a rotating platform that tracks the ISS
-heroImage: "/orbital_flush.jpg"
+description: putting the loo back in Waterloo. a toilet that flushes whenever an astronaut aboard the International Space Station flushes, mounted on a rotating platform that tracks the ISS
+heroImage: "/oflush/orbital_flush.jpg"
 ---
+import Aside from "../../components/Aside.jsx";
+import Image from "../../components/Image.jsx";
 import Subscribe from "../../components/ButtondownSubscribe.jsx";
+import MpdVideo from "../../components/MpdVideo.astro";
 
-This is a placeholder for a longer and ramblier version of the [Orbital Flush blogpost on Calvin's website](https://calvin.sh), detailing the whole journey and some fun behind-the-scenes details. If you'd like to see it when it's up, you can subscribe to my newsletter below!
+>\[I'm] impressed, amused, and entertained!  
+>— Chris Hadfield, retired Canadian astronaut, 2025
+
+>That's very random.  
+>— Andy Lee, founder of Sienci Labs, 2025
+
+This is Orbital Flush: Kai's Version, which is essentially a companion piece to Calvin's. [His blogpost on Orbital Flush is much more concise and coherent, I recommend reading his too!](https://calvin.sh/projects/orbital-flush/)
+
+1. [What is Orbital Flush?](#what-is-orbital-flush)
+2. [How do you know when astronauts flush?](#how-do-you-know-when-astronauts-flush)
+3. [The first build: Flow regulator, I hardly know 'er](#the-first-build-flow-regulator-i-hardly-know-er)
+4. [The second build: You spin my head right round](#the-second-build-you-spin-my-head-right-round)
+5. [The third build: Symposium, here we come!](#the-third-build-symposium-here-we-come)
+   1. [T-2 days: Hi, can we use your CNC router?](#t-2-days-hi-can-we-use-your-cnc-router)
+   2. [T-1 day: Electronics, how do they work?](#t-1-day-electronics-how-do-they-work)
+   3. [T-1 hour: Putting it all together](#t-1-hour-putting-it-all-together)
+6. [Acknowledgements](#acknowledgements)
+
+
+---
+
+## What is Orbital Flush?
+One way to describe Orbital Flush is as a kinetic art installation created by [Calvin Liang](https://calvin.sh), myself, and several other collaborators including the inimitable [Bill Pan](https://billpan.info/) and [Chloe Nguyen](https://chloenguyen.info/).
+
+Another way to describe it is as a cheap Home Depot toilet on a spinny platform. This description is funnier. It rotates to face the International Space Station (ISS), and flushes whenever astronauts on the ISS flush. Or, at least, our best guess of that.
+
+<Aside open summary="Quick fun stats">
+- Toilets purchased (and returned): 3  
+- Last-minute trips to Home Depot: 4  
+- CNC venues contacted: 11  
+- CNC bits broken: 3  
+- Average astro-flushes recorded per day: 20  
+</Aside>
+
+---
+
+## How do you know when astronauts flush?
+Excellent question. NASA wisely makes the decision not to tell us, because that would be weird, so we have to make our best guess. As such, we ended up collecting something like two weeks of live ISS urine tank level data. Here's a couple days of what that data looks like:
+
+<Image src="/oflush/oflush_chart.png" alt="Chart showing ISS urine tank level data from 9 Jan 2025 through 12 Jan 2025. Frequent red dots punctuate tank level increases, with large periods where the overall urine tank level decreases, and the occasional large uptick." caption="This data isn't weird unless you make it weird. Just saying." />
+
+Presumably, when the urine tank level goes up, that implies that an astronaut took a leak. However, the percentages sometimes oscillate ±1%, so not every increase in tank level is a genuine "urine deposit"[^1]. The red dots are "flushes" that we infer because the change in urine tank level is large enough to count, and it's likely to not just be random noise.
+
+[^1]: This is a real term that I found amidst the mountains of NASA urine tank documentation I read over the course of this project.
+
+Several other interesting observations: there are lengthy periods where the urine tank level decreases. This is when the ISS water reclamation system is in operation, extracting usable water from the liters of urine sitting around. You can also observe very large increases in urine tank level, where 30% or more of the tank gets filled up at once. This urine tank has about 8L of capacity, implying that this is more than 2L of urine added at once. While it's extremely amusing to think this is one particular astronaut with a simply *astronomical* bladder, this is likely transfers of urine from the storage tanks of the other toilets on board the ISS that aren't directly linked to the main urine tank.
+
+<Aside open summary="Aside: Urine management on the ISS, abridged">
+I now have unfortunate and unnecessary amounts of knowledge about urine management on the ISS, and I shall now deliver this information to you. 
+
+As most of you *should* know, humans produce both solid and liquid waste from distinct orifices. On the ISS, these are collected separately. Instead of dropping the kids off at the pool, the "kids" are vacuum-bagged for transport back to Earth for eventual disposal. The handling of liquid gold, on the other hand, has many more steps involved.
+
+To my knowledge, there are three space toilets, also known as Waste Hygiene Compartments (WHC), on the ISS. One of them, the one in Tranquility within the American segment, is directly connected to the Water Recovery System (which, confusingly, is only one of *two* separate water recovery systems on the ISS); the other two are in the Russian segment and are not. 
+
+<Image src="/oflush/iss_toilets.jpg" alt="" caption="This is... probably roughly accurate? Idk tbh, the ISS is complicated. The image is from NASA, the markings are my own work."/>
+
+Due to the lack of gravity in space, you essentially pee into a vacuum hose, which sucks up the urine, treats it with some kind of acid to control microbial growth, and sends it to an internal urine tank. These internal urine tanks are either automatically (in the case of the one in Tranquility) or manually emptied into the Wastewater Storage Tank Assembly (WSTA) of the Urine Processor Assembly (UPA). All this to say, astronauts on the ISS will sometimes have to lug around a tank filled with their pee because of water conservation. So it's probably not too much work for you to turn your taps off when not in use, just saying.
+
+Note that this also implies that there are several urine tanks on the ISS, not just one. This thus begs the question, which urine tank level do we have? It took a bunch of research for me to conclude it was likely to be the WSTA, but I did also get confirmation on Twitter/X by someone from NASA mission control (!) that it was indeed that tank.
+
+<Image src="/oflush/nasa_wsta.jpg" alt="" caption="I love distracting NASA employees from their mission-critical tasks!"/>
+
+When the WSTA is full enough, the UPA activates and sends urine to the Distillation Assembly (DA), which uses vacuum distillation to separate the distillate from what they term "urine concentrate". Instant urine, just add water!
+
+... anyway. The distillate, which is presumably mostly water, goes off to the Water Processor Assembly (WPA), which purifies the wastewater and makes it drinkable again through Science and Magic but Mostly Science. The urine concentrate, or "brine" as they like to euphemize, is further processed through the Brine Processor Assembly (BPA, not to be confused with the endocrine-disrupting chemical used in manufacturing of certain plastics). It extracts even more water, releasing it as humdity to the internal ISS atmosphere, and concentrates the urine even further. This presumably *very gross* final product is finally stored in a tank to be brought back to Earth for disposal.
+
+If you wouldn't believe it, this is already somewhat simplified. The full water and urine management system is described in the following *very understandable* diagram.
+
+<Image src="/oflush/iss_urine.jpg" alt="Confusing diagram with a lot of arrows and acronyms for water and urine management. Don't worry about it, this is mostly here as a rhetorical device." caption="All this just so astronauts can avoid going full Bear Grylls? Credit: NASA"/>
+
+To summarize: astronauts pee into a suction hose. The water in their urine is extracted in a lengthy multi-step process, eventually resulting in them either drinking it again or using it to maintain the humidity inside the ISS. The leftover urine concentrate is discarded. And now you know too.
+</Aside>
+
+## The first build: Flow regulator, I hardly know 'er
+Toilets on Earth flush by letting water flow from the tank into the bowl, and then drain out into sewage pipes underneath, with the tank water level replenished by pressurized water coming in from your water main. Since we couldn't reasonably expect to have a water hookup wherever we are, our plan was for Orbital Flush to self-contain all the water that it needs, and cycle it around when flushing. As such, we were going to have a secondary water tank underneath our toilet, and then use a submersible water pump to get it back into the top tank for the next flush.
+
+<Image src="/oflush/build1_cutaway.jpg" alt="" caption="" />
+
+We quickly discovered that while we could get water to flow back up into the top tank, it would do so _very_ slowly. This makes sense—water normally comes in through your pipes at ~50 psi, which we most certainly were not achieving with our diminuitive water pump. After some plumbing-related research, I discovered that Big Plumbing™ is artificially limiting the rate at which your toilet tank fills with a flow regulator[^2], which mitigates the rate of water flow into your toilet. We need no such mitigation, so... we removed it!
+
+[^2]: Please do not actually remove your flow regulator, your toilet and pipes may not enjoy that.
+
+<Image size="75%" src="/oflush/flow_regulator.jpg" alt="Me pulling out the flow regulator from our toilet tank using a pair of needle-nose pliers." caption="Regulator? I hardly know 'er!"/>
+
+This still wasn't enough, and we still ended up needing a more powerful pump. But with that sorted out, we could move on to subsequent steps, such as actually actuating the toilet lever. To do this, we stuck a Raspberry Pi very securely on a 3D-printed platform placed inside the top of the tank. This controlled a motor, raising and lowering the toilet flapper chain whenever an ISS flush was detected.
+
+<Image src="/oflush/pi_in_tank.jpg" alt="A Raspberry Pi inside the top of a toilet tank, with wires sprawled everywhere and a motor linked to the flush chain." caption="Note the complete lack of any waterproofing."/>
+
+With that, minutes before we were going to show it off, we hastily assembled all the components for the first time backstage at the [Atelier Showcase](https://atelier.place)! 
+
+<Image src="/oflush/assembly.jpeg" alt="The team is assembling the first build of Orbital Flush in a random hallway. Kai is screwing in the toilet tank hose, while Bill and Calvin affix the toilet seat with a screwdriver." caption="I assume this is what people mean when they say 'build in public'."/>
+
+It worked beautifully, not bad for a week's work!
+
+<Image src="/oflush/oflush_v1.jpg" alt="The first version of Orbital Flush, with Bill, Kai, Calvin, and Chloe posing next to it." caption="Not shown in picture: the dolly which it's all sitting on to enable us to wheel around ~40kg of water-filled toilet." />
+
+We returned the toilet to Home Depot later that week.[^3]
+
+[^3]: Their return policy allows you to return a product within 30 days with a receipt and the original packaging. The staff would open up the toilet box, see all the smaller boxes we neatly re-packed inside, and ask whether we'd used it. We would then sadly "confess" that it didn't fit in the bathroom, and then they'd process our refund.
+
+## The second build: You spin my head right round
+At this point, we were ready for bigger and grander things. It was time to construct the rotating platform.
+
+<Aside open summary="Aside: Colonel Hadfield, care to flush a toilet with us on stage?">
+We had to email Chris Hadfield to see if he was available to come down to the Socratica Symposium to demo Orbital Flush with us. Obviously.
+
+<Image src="/oflush/hadfield.jpg" alt="An email from Chris Hadfield, in which he says he's not available but that he is 'impressed, amused, and entertained'." caption="It's actually still so funny to me that we got a reply." />
+
+In the process of this, Chris Hadfield (or his social media manager) ended up reading and liking my thread about our Orbital Flush project thus far.
+
+<Image src="/oflush/hadfield_tweet.jpg" alt="Twitter notification informing me that Chris Hadfield liked my tweet, which starts with 'soooooooo we built a toilet that flushes when astronauts on the international space station pee'." caption="This is my greatest achievement to date."/>
+
+It's unfortunate that he wasn't available, but I think I know why—[his granddaughter, Wren Hadfield, was born just a few days after Symposium](https://www.facebook.com/photo.php?fbid=1185059532987415&id=100044501376615&set=a.244059357087442)! Welcome to the world, Wren \<3
+</Aside>
+
+Across many design brainstorming sessions, we came up with several different designs, before eventually settling on a design with a rigid central axle that the platform will rotate around, suspended on a raft of freely rotating ball bearings. The platform in itself would be a hollow cylinder: two plywood circles, with the walls composed of lots of little slices made from the remaining plywood material.
+
+<Image src="/oflush/whiteboard.jpg" alt="A whiteboard showing our incoherent scrawlings about the Orbital Flush rotating platform design." caption="This diagram is self-explanatory, I'm sure."/>
+
+The interior of the cylinder would thus contain the water tank, water pump, and motor for actually rotating the platform later. With this finally settled, in the week before Calvin and I were going to fly over to Waterloo, we got to CNCing everything out and actually assembling the prototype to make sure it worked.
+
+<Image src="/oflush/pump_tank.jpg" alt="A water pump sitting on top of a plastic tarp propped up with wooden blocks, which serves as the Orbital Flush water tank." caption="Listen, if it works, it works, right?"/>
+
+We spent most of our afternoons and evenings that week running back and forth between his garage and Home Depot, with the occasional detour to [MakerLabs](https://www.makerlabs.com/) to do our CNCing, and the night before each of our flights, we ended up with a functional rotating platform!
+
+<MpdVideo
+  url="https://calvin.sh/assets/projects/orbital-flush/toilet-crash/mpd/output.mpd"
+  aria-label="Video of Calvin spinning the initial Orbital Flush rotating platform so fast that the unsecured toilet tank falls off and almost hits him in the head."
+  controls
+  autoplay
+  muted
+  loop
+  playOnVisible
+  playsinline
+  style={{
+    maxWidth: "min(100%, 600px)",
+    maxHeight: "500px",
+    objectFit: "contain",
+    display: "block",
+    margin: "0 auto",
+  }}
+/>
+
+... oops. That's going to leave a mark.[^4]
+
+[^4]: And would you believe we managed to return this toilet too, chipped porcelain and all?
+
+## The third build: Symposium, here we come!
+Having run out of time in Vancouver, it was now time for us to rebuild everything in Waterloo. We decided to do this because it seemed cost-prohibitive to ship everything over, but in retrospect it would've been significantly easier to do that instead. 
+
+### T-2 days: Hi, can we use your CNC router?
+We were initially planning on replicating our design using a CNC router at the University of Waterloo, but we discovered that friends willing and able to let us use their alma mater's expensive and dangerous engineering equipment were few and far between. And so we pivoted. And by that, I mean, I reached out to every makerspace and CNC router provider in the Kitchener/Waterloo area. And when that didn't initially pan out, I tried the entire Greater Toronto Area. 
+
+<Image src="/oflush/fb_marketplace.jpg" alt="Facebook Marketplace screenshot showing Kai's DMs to many CNC providers." caption="Turns out, a lot of them advertise their services on Facebook Marketplace."/>
+
+Eventually, the [Kwartzlab Makerspace](https://www.kwartzlab.ca/) (thanks Konstantin \<3) suggested that we reach out to [Sienci Labs](https://sienci.com) (pronounced like CNC), who said yes! Within a day we had confirmed the details, with one small hitch: they couldn't open the VCarve file we sent them due to licensing restrictions[^5]. So we would have to either:
+1. Remote into the Makerspace computer, make our changes, and export the G-code (i.e. the actual step-by-step cut instructions for the CNC router) directly,
+2. Create new G-code using a different software without the licensing restrictions, or
+3. Recreate the VCarve file from an Adobe Illustrator file using their software on the day itself.
+
+[^5]: Apparently, files created on the Makerspace edition, as our files were, cannot be opened using the Pro edition. Same with the free trial version.
+
+After determining that Option 1 was probably not possible, I then tried Option 2. I downloaded and learned 5 different CAD/CAM software, before concluding that most of them _suck quite hard_[^6], and that there are _many_ intimidating and scary settings that should be configured based on the capabilities of your CNC router, which I do not know. And so we found ourselves forced into Option 3, and getting help from the incredible Scott Saari of Sienci Labs to configure the VCarve settings to fit the AltMill.
+
+[^6]: I'm sure Onshape and Autodesk Fusion 360 are great for professionals, but I found them rather confusing and overwhelming. Carbide Create is very simple, but the latest version that will let you export G-code without a Pro subscription is V6 (last released in 2022, they're on V8 already), and it's... just okay. Easel just seemed kinda mid tbh. VCarve definitely seems to be the most usable of them, the pain of licensing restrictions aside.
+
+So, in the days before the journey to Sienci Labs, I found myself speedrunning learning VCarve such that I would be able to recreate whatever changes need to be made to our files the next morning. Did I mention that VCarve is Windows-only, and I have a Mac laptop, and I tried using it with Wine and it didn't work? I ended up having my brother turn on my desktop computer back in Vancouver so I could Chrome Remote Desktop into it, install VCarve, and practice recreating our VCarve file using the hotel TV as a second monitor. Curse you, VCarve licensing restrictions!
+
+<Image src="/oflush/old-man-yells-at-vcarve.jpg" alt="Meme from the Simpsons of a newspaper showing the headline of an old man yelling at a cloud in a newspaper, except instead of a cloud it's the VCarve logo." caption="POV: you've recreated the same VCarve file 3 times but none will let you actually do anything with it because of licenses AAAAA"/>
+
+Thankfully, thanks to the generosity of the lovely folks at Sienci who seemed absolutely tickled by our ridiculous project, we got to witness the AltMill in action[^7].
+
+[^7]: Not sponsored, just a fan now. If you like making cool hardware projects, you should consider getting a Sienci CNC router for your workshop!
+
+TODO: replace with new altmill trimmed from their fb video
+<MpdVideo
+  url="/oflush/altmill/altmill.mpd"
+  aria-label="Timelapse video of the team showing off Orbital Flush at the Socratica Symposium."
+  controls
+  autoplay
+  muted
+  loop
+  playOnVisible
+  playsinline
+  style={{
+    maxWidth: "min(100%, 600px)",
+    maxHeight: "500px",
+    objectFit: "contain",
+    display: "block",
+    margin: "0 auto",
+  }}
+/>
+
+And after chewing through a handful of their CNC bits (sorry...), we had everything we needed!
+
+<Image src="/oflush/uhaul_pieces.jpg" alt="A collection of unassembled wooden pieces comprising Orbital Flush, piled haphazardly on the inside of our UHaul." caption="Well, wood you look at that." />
+
+### T-1 day: Magnetometers, how do they work?
+<Aside summary="Aside: Our final (and fruitless) components run">
+One annoying problem that we had noticed was that during regular operation, the water pump would heat the water sitting in the tank, making it surprisingly warm after a prolonged period. This presumably wouldn't be a noticeable problem for its intended usage in large volumes of water (like swimming pools), but was *very* noticeable for us. As such, we thought to try only providing power to the water pump for a limited duration of time after a flush. Unfortunately, the voltage of the water pump is very different than that of our Raspberry Pi board, thus necessitating us acquiring some kind of voltage converter for electrical engineering reasons I don't understand.
+
+The nearest electronics component shop that could possibly have what we needed was in the barely-not-nearby-enough-to-be-convenient city of Guelph, and so we set off on our final last-minute journey for components.
+
+<Image src="/oflush/electronics_run.jpg" alt="Screenshot from Google Maps showing the estimated trip itinerary from the Waterloo Rec Center to SAYAL Electronics in Guelph, ON. Depending on route, it's about an 18km drive that'll take 15-30 minutes." caption="The final last-minute components run that we did, all the way to Guelph." />
+
+Alas, they did not actually have what we needed, so we ultimately returned to the hotel room dejected and empty-handed, having burned much time that we very much did not have.
+</Aside>
+
+It was the afternoon before Symposium, and all we have is a pile of wood, a bunch of parts, and a dream. While we had already tested some smaller assemblies of the larger electronic components (i.e. the motor), and we knew how to get the toilet flushing, everything else was still unevaluated. Picture the scene, then, as we connect our magnetometer to power for the first time, figure out how to read it from the Raspberry Pi, and spin it around, only to conclude that the headings values are *incredibly* inaccurate, off by anywhere from 10 to 180 degrees for any given direction.
+
+After an extended period of panicked research, we discovered that every magnetometer requires calibration due to various sources of hard and soft iron magnetic distortion. In brief, nearby ferromagnetic objects will produce a magnetic field that will end up throwing off the underlying reading, and so it is expected that you will have to account for that. To do the calibration, you slowly rotate the magnetometer around, collecting the raw readings, infer the distortions from the data and correct for it.
+
+<Image src="/oflush/calibration.png" alt="Scatter plot showing raw magnetometer readings making a rough circle of dots centered a large distance away from the origin, with a number of outlier points both inside and outside the circle." caption="Magnetic calibration data collected inside our hotel room. Raw X axis and Y axis magnetometer readings are on the respective axes, and the black lines represent the origin. The axes of the graph are unlabelled because I was lazy."/>
+
+Soft iron distortion would warping the circle into some kind of ellipsoid, and hard iron distortion just shifts the circle to no longer be centered around the origin. Thankfully, we appear to only have hard iron distortion, so it was relatively easy to correct for. So we found some constants to shift the X/Y values over by, used them to calculate our headings, and much to our surprise, the new heading values were actually roughly correct! We'd have to redo our calibration later once we put all the parts inside a toilet, but it would... probably work?
+
+With just hours to go, we then got to writing the code necessary to actually control the motor based on the heading. We couldn't actually test that *this* part worked, of course, but famously, programmers working on very tight deadlines *never* write bugs.
+
+### T-1 hour: Putting it all together
+We didn't have the space (or time) to assemble everything in advance, so we had no choice but to pull up to the [Socratica Symposium](https://symposium.socratica.info/) venue in our UHaul, fully assemble everything for the first time ever, redo our magnetic distortion calibration, and just hope against hope that it would all work out.
+
+<Image src="https://calvin.sh/_astro/u-haul.DgcgKwVr_M0irF.jpeg" alt="Interior of a U-Haul van filled with woodworking materials, including large circular wooden discs, a Glacier Bay toilet box, curved wooden strips, cut lumber, and a partially assembled wooden piece with metal bearings." caption="It's showtime!" />
+
+So we filled up the tank, affixed the motor under the platform, unboxed and assembled our toilet, and connected all the components together. Finally, we applied our finishing touches, which were several sheets of faux marble and some gold tape to hide the seams between sheets, plugged in the motor, and finally witnessed our creation in all its glory. Somewhat unbelievably, the whole thing actually worked post-calibration[^8], mere minutes before we were set to begin demoing.
+
+[^8]: ... minor leaking problem notwithstanding.
+
+<Image src="/oflush/orbital_flush.jpg" alt="Orbital Flush, fully assembled. A toilet sitting atop , with a banner describing it, along with a quote from Chris Hadfield." caption="The best demo at Socratica Symposium, no I'm not biased you're biased"/>
+
+And that's how we put the "loo" back in Waterloo!
+
+<MpdVideo
+  url="https://calvin.sh/assets/projects/orbital-flush/time-lapse/mpd/output.mpd"
+  aria-label="Timelapse video of the team showing off Orbital Flush at the Socratica Symposium."
+  controls
+  autoplay
+  muted
+  loop
+  playOnVisible
+  playsinline
+  style={{
+    maxWidth: "min(100%, 600px)",
+    maxHeight: "500px",
+    objectFit: "contain",
+    display: "block",
+    margin: "0 auto",
+  }}
+/>
+
+## Acknowledgements
+We owe a _huge_ thanks to Scott and Andy of [Sienci Labs](https://sienci.com/), who let us use an AltMill in their shop to get all our stuff done super last minute. In exchange, they recorded a video of us as promotional marketing material, but all they ended up making was [a small Facebook post about it](https://www.facebook.com/siencilabs/posts/flashbackfridays-our-engineering-friends-from-vancouver-calvin-kai-and-braeden-w/1257272563065995/), so we _definitely_ got the better end of the deal.
+
+Shoutout once again to my collaborators in this endeavour, [Calvin Liang](https://calvin.sh), [Bill Pan](https://billpan.info/) and [Chloe Nguyen](https://chloenguyen.info/); this wouldn't have come together without all your ideas, support, and enthusiasm, and I'm grateful to have all of you in my life ❤️. Thanks also to [Braeden Hall](https://eng.brhall.dev/), who helped transport two large plywood sheets from Home Depot to Sienci Labs. My frail Asian frame could never have managed it alone. Last but not least, deep love and gratitude to our friends and collaborators over at [Atelier](https://atelier.place/) and [Socratica](https://socratica.info/) for listening to us rant about this goofy project for months on end, and letting us share it with you all!
+
+---
 
 <br />
-<Subscribe cta="Get the long Orbital Flush blogpost!"/>
+<Subscribe />
