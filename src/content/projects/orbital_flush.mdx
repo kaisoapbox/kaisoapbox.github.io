@@ -15,8 +15,26 @@ import MpdVideo from "../../components/MpdVideo.astro";
 >That's very random.  
 >— Andy Lee, founder of Sienci Labs, 2025
 
-tl;dr: Orbital Flush is a toilet that flushes whenever astronauts on the International Space Station (ISS) flush, mounted on a platform that rotates to face the ISS, that we put together in Vancouver and Waterloo. Yes, it's a real toilet, but please don't actually use it.
+tl;dr: Orbital Flush is a toilet that flushes whenever astronauts on the International Space Station (ISS) flush, mounted on a platform that rotates to face the ISS, that we put together. Yes, it's a real toilet, but please don't actually use it. We built our first prototypes in Vancouver, and the final version in Waterloo for the Socratica Symposium.
 
+<MpdVideo
+  url="https://calvin.sh/assets/projects/orbital-flush/time-lapse/mpd/output.mpd"
+  aria-label="Timelapse video of the team showing off Orbital Flush at the Socratica Symposium. Orbital Flush rotates around slowly while people blitz around at high speed like insects, while Kai, Bill, and Calvin fiddle with various components to show attendees cool stuff."
+  controls
+  autoplay
+  muted
+  loop
+  playOnVisible
+  playsinline
+  style={{
+    maxWidth: "min(100%, 600px)",
+    maxHeight: "500px",
+    objectFit: "contain",
+    display: "block",
+    margin: "0 auto",
+  }}
+/>
+<br />
 ---
 
 This is Orbital Flush: Kai's Version, which is essentially a companion piece to Calvin's. [His blogpost on Orbital Flush is much more concise and coherent, I recommend reading his too!](https://calvin.sh/projects/orbital-flush/)
@@ -49,12 +67,17 @@ Another way to describe it is as a cheap Home Depot toilet on a spinny platform.
 
 ---
 
+## Why?
+Why not?
+
 ## How do you know when astronauts flush?
-Excellent question. NASA wisely makes the decision not to tell us, because that would be weird, so we have to make our best guess. As such, we ended up collecting something like two weeks of live ISS urine tank level data. Here's a couple days of what that data looks like:
+Excellent question. NASA wisely makes the decision not to tell us, because that would be weird. However, they provide enough data for us to make a fairly educated guess. See, NASA provides a large amount of realtime ISS telemetry data[^0]. Among those numerous data points is the live urine tank level onboard, as a key component of the life support console. As such, we ended up collecting something like two weeks of live ISS urine tank level data so we could get a sense for what that looks like. Here's just a sample of what that data looks like:
+
+[^0]: If you're curious about the details of why, [Calvin wrote about it in more detail in his blogpost](https://calvin.sh/projects/orbital-flush/?utm_source=kaisoapbox.com). This, and perhaps how he got this absurd idea in the first place, are probably the only things he wrote about in more detail than I.
 
 <Image src="/oflush/oflush_chart.png" alt="Chart showing ISS urine tank level data from 9 Jan 2025 through 12 Jan 2025. Frequent red dots punctuate tank level increases, with large periods where the overall urine tank level decreases, and the occasional large uptick." caption="This data isn't weird unless you make it weird. Just saying." />
 
-Presumably, when the urine tank level goes up, that implies that an astronaut took a leak. However, the percentages sometimes oscillate ±1%, so not every increase in tank level is a genuine "urine deposit"[^1]. The red dots are "flushes" that we infer because the change in urine tank level is large enough to count, and it's likely to not just be random noise.
+One would assume, rather logically, that when the urine tank level went up, it would imply that an astronaut took a leak. However, the percentages sometimes oscillate ±1%, so not every increase in tank level is a genuine "urine deposit"[^1]. The red dots are "flushes" that we infer because the change in urine tank level is large enough to count, and it's likely to not just be random noise.
 
 [^1]: This is a real term that I found amidst the mountains of NASA urine tank documentation I read over the course of this project.
 
@@ -241,26 +264,8 @@ So we filled up the tank, affixed the motor under the platform, unboxed and asse
 
 <Image src="/oflush/orbital_flush.jpg" alt="Orbital Flush, fully assembled. A toilet sitting atop , with a banner describing it, along with a quote from Chris Hadfield." caption="The best demo at Socratica Symposium, no I'm not biased you're biased"/>
 
-And that's how we put the "loo" back in Waterloo!
+And that's how we put the "loo" back in Waterloo! 
 
-<MpdVideo
-  url="https://calvin.sh/assets/projects/orbital-flush/time-lapse/mpd/output.mpd"
-  aria-label="Timelapse video of the team showing off Orbital Flush at the Socratica Symposium."
-  controls
-  autoplay
-  muted
-  loop
-  playOnVisible
-  playsinline
-  style={{
-    maxWidth: "min(100%, 600px)",
-    maxHeight: "500px",
-    objectFit: "contain",
-    display: "block",
-    margin: "0 auto",
-  }}
-/>
-<br />
 ## Acknowledgements
 We owe a _huge_ thanks to Scott and Andy of [Sienci Labs](https://sienci.com/), who let us use an AltMill in their shop to get all our stuff done super last minute. In exchange, they recorded a video of us as promotional marketing material, but all they ended up making was [a small Facebook post about it](https://www.facebook.com/siencilabs/posts/flashbackfridays-our-engineering-friends-from-vancouver-calvin-kai-and-braeden-w/1257272563065995/), so we _definitely_ got the better end of the deal.
 
