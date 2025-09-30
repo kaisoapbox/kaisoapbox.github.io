@@ -63,13 +63,13 @@ As most of you *should* know, humans produce both solid and liquid waste from di
 
 To my knowledge, there are three space toilets, also known as Waste Hygiene Compartments (WHC), on the ISS. One of them, the one in Tranquility within the American segment, is directly connected to the Water Recovery System (which, confusingly, is only one of *two* separate water recovery systems on the ISS); the other two are in the Russian segment and are not. 
 
-<Image src="/oflush/iss_toilets.jpg" alt="" caption="This is... probably roughly accurate? Idk tbh, the ISS is complicated. The image is from NASA, the markings are my own work."/>
+<Image src="/oflush/iss_toilets.jpg" alt="Photograph of the ISS indicating the approximate locations of the 3 toilets onboard; Tranquility (which is in the American segment), Nauka, and Zvezda. The actual locations don't really matter anyway, just know there are 3." caption="This is... probably roughly accurate? Idk tbh, the ISS is complicated. The image is from NASA, the markings are my own work."/>
 
 Due to the lack of gravity in space, you essentially pee into a vacuum hose, which sucks up the urine, treats it with some kind of acid to control microbial growth, and sends it to an internal urine tank. These internal urine tanks are either automatically (in the case of the one in Tranquility) or manually emptied into the Wastewater Storage Tank Assembly (WSTA) of the Urine Processor Assembly (UPA). All this to say, astronauts on the ISS will sometimes have to lug around a tank filled with their pee because of water conservation. So it's probably not too much work for you to turn your taps off when not in use, just saying.
 
 Note that this also implies that there are several urine tanks on the ISS, not just one. This thus begs the question, which urine tank level do we have? It took a bunch of research for me to conclude it was likely to be the WSTA, but I did also get confirmation on Twitter/X by someone from NASA mission control (!) that it was indeed that tank.
 
-<Image src="/oflush/nasa_wsta.jpg" alt="" caption="I love distracting NASA employees from their mission-critical tasks!"/>
+<Image src="/oflush/nasa_wsta.jpg" alt="Screenshot of a tweet from Twitter/X user @StevePatlan to me. The exact text is as follows. 'ISS Electrical (SPARTAN/PRO) here. Current ETHOS Expedition/Increment Lead tells me that it IS the UPA tank, called the Wastewater Storage Tank Assembly (WSTA). To confirm, I plotted UPA WSTA and verified the same value at the same time as your screenshot.' Then there's a Windows XP looking-ass graph of a line going up and down, which I assume is the UPA WSTA level, given that it's labelled 'Node_3_UPA_WSTA_Qty_Ct' in the bottom right corner." caption="ETHOS stands for Environmental and THermal Operating Systems; in other words, the life support systems. I love distracting NASA employees from their mission-critical tasks!"/>
 
 When the WSTA is full enough, the UPA activates and sends urine to the Distillation Assembly (DA), which uses vacuum distillation to separate the distillate from what they term "urine concentrate". Instant urine, just add water!
 
@@ -85,7 +85,7 @@ To summarize: astronauts pee into a suction hose. The water in their urine is ex
 ## The first build: Flow regulator, I hardly know 'er
 Toilets on Earth flush by letting water flow from the tank into the bowl, and then drain out into sewage pipes underneath, with the tank water level replenished by pressurized water coming in from your water main. Since we couldn't reasonably expect to have a water hookup wherever we are, our plan was for Orbital Flush to self-contain all the water that it needs, and cycle it around when flushing. As such, we were going to have a secondary water tank underneath our toilet, and then use a submersible water pump to get it back into the top tank for the next flush.
 
-<Image src="/oflush/build1_cutaway.jpg" alt="" caption="" />
+<Image src="/oflush/build1_cutaway.jpg" alt="Top-down view of a toilet tank propped up on top of wooden planks atop a plastic container. A small water pump is inside the plastic container, connected to the toilet fill valve." caption="Our testing setup was rather scuffed." />
 
 We quickly discovered that while we could get water to flow back up into the top tank, it would do so _very_ slowly. This makes sense—water normally comes in through your pipes at ~50 psi, which we most certainly were not achieving with our diminuitive water pump. After some plumbing-related research, I discovered that Big Plumbing™ is artificially limiting the rate at which your toilet tank fills with a flow regulator[^2], which mitigates the rate of water flow into your toilet. We need no such mitigation, so... we removed it!
 
