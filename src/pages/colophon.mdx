@@ -1,10 +1,11 @@
 ---
 title: "Colophon"
 description: "How this site is made"
-updatedDate: "Feb 04 2025"
+updatedDate: "Nov 05 2025"
 ---
 import BasePage from "../layouts/BasePage.astro";
 import FormattedDate from "../components/FormattedDate.astro";
+import Aside from "../components/Aside";
 
 <BasePage title={frontmatter.title} description={frontmatter.description}>
 # colophon
@@ -29,7 +30,13 @@ I stick to normal sentence-case for extended writing pieces (readability reasons
 ## technical stack
 This site is built using the [Astro](https://astro.build/) framework for static site generation, primarily using MDX for most content-driven pages and occasionally using [React](https://react.dev) components for some pages which have more interactivity. Astro is really nice for my purposes because while I can build some reusable components using JS, I can also ensure they compile down to non-interactive HTML for efficiency of load. I actively minimize the amount of JS I'm serving to improve page load speed, but I can't get rid of all of it — dark mode, for instance, virtually necessitates a little bit of client-side JS. No fancy CSS libraries here either, I'm using vanilla CSS, mostly for learning purposes.
 
-I also have a Ko-Fi button component which unfortunately does use client-side JS. I'll get rid of it soon and replace it with something which doesn't suck.
+<Aside summary="Aside: Unhinged profanity-laden rant about the modern web">
+I loathe how modern websites are so ungodly slow and burdensome. It should not take 400MB of memory to load your fucking blog, dude. Yes, most computers can handle this, but you can FEEL how slow it is when a new pageload takes a good second or two longer than it should. Like, yes, we have all these new features to do fancy browser animations and we can do this by hijacking your cursor, yippee, look at all this interactivity. NO, GO FUCK YOURSELF. Let me scroll normally. Fuck all your fancy GSAP animations, but like, only just a little, because at least they can be pretty.
+
+We deserve better than all the dogshit slop being served up. Internet and data bills are being unnecessarily driven up because the people who make websites don't have enough respect for their users to put in the time to streamline their websites. Years of our lives are being wasted because sites aren't loading snappily, interactions unnecessarily take longer than they need to, etc. AAAARGH.
+</Aside>
+
+I also have a Ko-Fi button component which unfortunately does use client-side JS. I'll get rid of it soon and replace it with something which doesn't suck. Or just get rid of it entirely.
 
 Thus, while this site is not quite as fast and lightweight as some other personal websites (looking at you, [Judah](https://joodaloop.com)), it still does pretty well by my own standards.
 
@@ -47,7 +54,7 @@ The first implementation I tried for sidenotes was a simple JSX component which 
 
 So I rolled my own rehype plugin to parse normal markdown footnotes and turn them into sidenotes, [plugin code here](https://github.com/kaisoapbox/kaisoapbox.github.io/tree/main/src/plugins/sidenotes.js). No client-side JS, just some pre-processing at build time.
 
-When the screen is large enough, the sidenotes are shown, the footnotes section is hidden, and the footnote link refs are disabled. If not, then it just shows the footnotes normally. At some point I'll update it to have a click-to-expand element of some kind, hopefully also without needing client-side JS, and I can do away with the footnotes (except perhaps for screen-readers?).
+When the screen is large enough, the sidenotes are shown. When it is too small, then there's a click/hover-to-expand orb inspired by those on [Tim Urban](https://waitbutwhy.com/)'s blog. Instead of using the library that he used, [bigfootjs](https://bigfootjs.com/) (which, really, is how anyone sensible should implement this), I made my own version without any client-side JS using a input checkbox. I still need to double-check if this works properly for screen readers, but I'm relatively happy with how it turned out.
 
 ### aside blocks
 I'm just using a specially-styled `<details>` HTML element such that it once again requires no client-side JS.

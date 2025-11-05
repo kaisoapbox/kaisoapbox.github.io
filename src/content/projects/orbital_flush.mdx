@@ -71,13 +71,13 @@ Another way to describe it is as a cheap Home Depot toilet on a spinny platform.
 Why not?
 
 ## How do you know when astronauts flush?
-Excellent question. NASA wisely makes the decision not to tell us, because that would be weird. However, they provide enough data for us to make a fairly educated guess. See, NASA provides a large amount of realtime ISS telemetry data[^0]. Among those numerous data points is the live urine tank level onboard, as a key component of the life support console. As such, we ended up collecting something like two weeks of live ISS urine tank level data so we could get a sense for what that looks like. Here's just a sample of what that data looks like:
+Excellent question. NASA wisely makes the decision not to tell us, because that would be weird. However, they provide enough data for us to make a fairly educated guess. See, NASA provides a large amount of realtime ISS telemetry data.[^0] Among those numerous data points is the live urine tank level onboard, as a key component of the life support console. As such, we ended up collecting something like two weeks of live ISS urine tank level data so we could get a sense for what that looks like. Here's just a sample of what that data looks like:
 
 [^0]: If you're curious about the details of why, [Calvin wrote about it in more detail in his blogpost](https://calvin.sh/projects/orbital-flush/?utm_source=kaisoapbox.com). This, and perhaps how he got this absurd idea in the first place, are probably the only things he wrote about in more detail than I.
 
 <Image src="/oflush/oflush_chart.png" alt="Chart showing ISS urine tank level data from 9 Jan 2025 through 12 Jan 2025. Frequent red dots punctuate tank level increases, with large periods where the overall urine tank level decreases, and the occasional large uptick." caption="This data isn't weird unless you make it weird. Just saying." />
 
-One would assume, rather logically, that when the urine tank level went up, it would imply that an astronaut took a leak. However, the percentages sometimes oscillate ±1%, so not every increase in tank level is a genuine "urine deposit"[^1]. The red dots are "flushes" that we infer because the change in urine tank level is large enough to count, and it's likely to not just be random noise.
+One would assume, rather logically, that when the urine tank level went up, it would imply that an astronaut took a leak. However, the percentages sometimes oscillate ±1%, so not every increase in tank level is a genuine "urine deposit".[^1] The red dots are "flushes" that we infer because the change in urine tank level is large enough to count, and it's likely to not just be random noise.
 
 [^1]: This is a real term that I found amidst the mountains of NASA urine tank documentation I read over the course of this project.
 
@@ -114,7 +114,7 @@ Toilets on Earth flush by letting water flow from the tank into the bowl, and th
 
 <Image src="/oflush/build1_cutaway.jpg" alt="Top-down view of a toilet tank propped up on top of wooden planks atop a plastic container. A small water pump is inside the plastic container, connected to the toilet fill valve." caption="Our testing setup was rather scuffed." />
 
-We quickly discovered that while we could get water to flow back up into the top tank, it would do so _very_ slowly. This makes sense—water normally comes in through your pipes at ~50 psi, which we most certainly were not achieving with our diminuitive water pump. After some plumbing-related research, I discovered that Big Plumbing™ is artificially limiting the rate at which your toilet tank fills with a flow regulator[^2], which mitigates the rate of water flow into your toilet. We need no such mitigation, so... we removed it!
+We quickly discovered that while we could get water to flow back up into the top tank, it would do so _very_ slowly. This makes sense—water normally comes in through your pipes at ~50 psi, which we most certainly were not achieving with our diminuitive water pump. After some plumbing-related research, I discovered that Big Plumbing™ is artificially limiting the rate at which your toilet tank fills with a flow regulator,[^2] which mitigates the rate of water flow into your toilet. We need no such mitigation, so... we removed it!
 
 [^2]: Please do not actually remove your flow regulator, your toilet and pipes may not enjoy that.
 
@@ -191,14 +191,14 @@ We were initially planning on replicating our design using a CNC router at the U
 
 <Image src="/oflush/fb_marketplace.jpg" alt="Facebook Marketplace screenshot showing Kai's DMs to many CNC providers." caption="Turns out, a lot of them advertise their services on Facebook Marketplace."/>
 
-Eventually, the [Kwartzlab Makerspace](https://www.kwartzlab.ca/) (thanks Konstantin \<3) suggested that we reach out to [Sienci Labs](https://sienci.com) (pronounced like CNC), who said yes! Within a day we had confirmed the details, with one small hitch: they couldn't open the VCarve file we sent them due to licensing restrictions[^5]. So we would have to either:
+Eventually, the [Kwartzlab Makerspace](https://www.kwartzlab.ca/) (thanks Konstantin \<3) suggested that we reach out to [Sienci Labs](https://sienci.com) (pronounced like CNC), who said yes! Within a day we had confirmed the details, with one small hitch: they couldn't open the VCarve file we sent them due to licensing restrictions.[^5] So we would have to either:
 1. Remote into the Makerspace computer, make our changes, and export the G-code (i.e. the actual step-by-step cut instructions for the CNC router) directly,
 2. Create new G-code using a different software without the licensing restrictions, or
 3. Recreate the VCarve file from an Adobe Illustrator file using their software on the day itself.
 
 [^5]: Apparently, files created on the Makerspace edition, as our files were, cannot be opened using the Pro edition. Same with the free trial version.
 
-After determining that Option 1 was probably not possible, I then tried Option 2. I downloaded and learned 5 different CAD/CAM software, before concluding that most of them _suck quite hard_[^6], and that there are _many_ intimidating and scary settings that should be configured based on the capabilities of your CNC router, which I do not know. And so we found ourselves forced into Option 3, and getting help from the incredible Scott Saari of Sienci Labs to configure the VCarve settings to fit the AltMill.
+After determining that Option 1 was probably not possible, I then tried Option 2. I downloaded and learned 5 different CAD/CAM software, before concluding that most of them _suck quite hard_,[^6] and that there are _many_ intimidating and scary settings that should be configured based on the capabilities of your CNC router, which I do not know. And so we found ourselves forced into Option 3, and getting help from the incredible Scott Saari of Sienci Labs to configure the VCarve settings to fit the AltMill.
 
 [^6]: I'm sure Onshape and Autodesk Fusion 360 are great for professionals, but I found them rather confusing and overwhelming. Carbide Create is very simple, but the latest version that will let you export G-code without a Pro subscription is V6 (last released in 2022, they're on V8 already), and it's... just okay. Easel just seemed kinda mid tbh. VCarve definitely seems to be the most usable of them, the pain of licensing restrictions aside.
 
@@ -206,7 +206,7 @@ So, in the days before the journey to Sienci Labs, I found myself speedrunning l
 
 <Image src="/oflush/old-man-yells-at-vcarve.jpg" alt="Meme from the Simpsons of a newspaper showing the headline of an old man yelling at a cloud in a newspaper, except instead of a cloud it's the VCarve logo." caption="POV: you've recreated the same VCarve file 3 times but none will let you actually do anything with it because of licenses AAAAA"/>
 
-Thankfully, thanks to the generosity of the lovely folks at Sienci who seemed absolutely tickled by our ridiculous project, we got to witness the AltMill in action[^7].
+Thankfully, thanks to the generosity of the lovely folks at Sienci who seemed absolutely tickled by our ridiculous project, we got to witness the AltMill in action.[^7]
 
 [^7]: Not sponsored, just a fan now. If you like making cool hardware projects, you should consider getting a Sienci CNC router for your workshop!
 
@@ -258,7 +258,7 @@ We didn't have the space (or time) to assemble everything in advance, so we had 
 
 <Image src="https://calvin.sh/_astro/u-haul.DgcgKwVr_M0irF.jpeg" alt="Interior of a U-Haul van filled with woodworking materials, including large circular wooden discs, a Glacier Bay toilet box, curved wooden strips, cut lumber, and a partially assembled wooden piece with metal bearings." caption="It's showtime!" />
 
-So we filled up the tank, affixed the motor under the platform, unboxed and assembled our toilet, and connected all the components together. Finally, we applied our finishing touches, which were several sheets of faux marble and some gold tape to hide the seams between sheets, plugged in the motor, and finally witnessed our creation in all its glory. Somewhat unbelievably, the whole thing actually worked post-calibration[^8], mere minutes before we were set to begin demoing.
+So we filled up the tank, affixed the motor under the platform, unboxed and assembled our toilet, and connected all the components together. Finally, we applied our finishing touches, which were several sheets of faux marble and some gold tape to hide the seams between sheets, plugged in the motor, and finally witnessed our creation in all its glory. Somewhat unbelievably, the whole thing actually worked post-calibration,[^8] mere minutes before we were set to begin demoing.
 
 [^8]: ... minor leaking problem notwithstanding.
 

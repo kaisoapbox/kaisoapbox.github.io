@@ -15,6 +15,7 @@ export function rehypeSidenotes() {
             // clone footnote and convert into sidenote
             const newSidenote = structuredClone(element.children[1]);
             newSidenote.tagName = "span";
+            newSidenote.properties.id = `sidenote-${sidenotes.length + 1}`;
             newSidenote.properties.className = `sidenote-${
               sidenotes.length % 2 ? "left" : "right"
             }`;
@@ -35,11 +36,21 @@ export function rehypeSidenotes() {
       }
     });
     // TODO: currently assumes all superscript elements are footnotes
+    let noteCounter = 1;
     visit(tree, { tagName: "sup" }, (node, index, parent) => {
       node.children[0].properties.className = ["footnote-ref"];
+      node.children[0].properties.href = `#sidenote-${noteCounter}`;
       node.children = [h("b", node.children)];
       const nextSidenote = sidenotes.shift();
-      parent.children.splice(index + 1, 0, nextSidenote);
+      const nextCheckbox = h("input", {
+        type: "checkbox",
+        dataId: noteCounter,
+        class: "popup",
+      });
+      parent.children.splice(index + 1, 0, nextCheckbox, nextSidenote);
+      // delete superscript elem
+      parent.children[index] = h();
+      noteCounter += 1;
       return SKIP;
     });
     return tree;
