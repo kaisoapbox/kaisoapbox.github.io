@@ -336,7 +336,7 @@ function Quiz(props) {
                       pass ? " like" : ", unlike"
                     } me?\n`
                   ) +
-                  "&url=https://kaisoapbox.com/projects/faa_biographical_assessment"
+                  "&url=https://kaisoapbox.com/projects/faa_biographical_assessment/"
               );
             }}
           >

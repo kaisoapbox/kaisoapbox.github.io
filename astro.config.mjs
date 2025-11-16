@@ -16,6 +16,6 @@ export default defineConfig({
     react(),
   ],
   redirects: {
-    "/faa_biographical_assessment": "/projects/faa_biographical_assessment",
+    "/faa_biographical_assessment": "/projects/faa_biographical_assessment/",
   },
 });
