@@ -4,9 +4,10 @@ import { getCollection } from "astro:content";
 import FormattedDate from "../../components/FormattedDate.astro";
 
 import BasePage from "../../layouts/BasePage.astro";
+import { Image } from "astro:assets";
 
 const posts = (await getCollection("projects")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
 
@@ -88,7 +89,12 @@ const posts = (await getCollection("projects")).sort(
         posts.map((post) => (
           <li>
             <a href={`/projects/${post.slug}/`}>
-              <img width={720} height={360} src={post.data.heroImage} alt="" />
+              <Image
+                width={720}
+                height={360}
+                src={post.data.heroImage || ""}
+                alt=""
+              />
               <h4 class="title">{post.data.title}</h4>
               <p class="date">
                 <FormattedDate date={post.data.pubDate} />

@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
 import FormattedDate from "../components/FormattedDate.astro";
 
 import BasePage from "./BasePage.astro";
@@ -70,7 +71,7 @@ const {
     {
       heroImage && (
         <div class="hero-image">
-          <img
+          <Image
             width={imageWidth || 1020}
             height={imageHeight || 510}
             src={heroImage}

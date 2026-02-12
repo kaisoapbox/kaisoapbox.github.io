@@ -1,0 +1,16 @@
+---
+import { Image as AstroImage } from "astro:assets";
+const { src, alt, width, height, caption } = Astro.props;
+---
+
+<div style={{ textAlign: "center" }}>
+  <figure>
+    <AstroImage
+      src={src || ""}
+      width={width || 700}
+      height={height || 700}
+      alt={alt || ""}
+    />
+    <figcaption>{caption || ""}</figcaption>
+  </figure>
+</div>
