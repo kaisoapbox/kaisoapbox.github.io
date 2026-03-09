@@ -62,8 +62,6 @@ I actually met both of my interns during the competition last year, though in ve
 Tianshi I met when he tried to challenge one of his team's test case results in the competition finals. He alleged that it was a bug in my code, and after checking my logs, concluded that it was not; we then went through his code and discovered that he neglected to `import torch`, the true origin of the bug. One would very reasonably imagine that this would have been to his detriment when he subsequently applied. Well, I admit that this was briefly true, and I *was* tempted to reject his application out of hand because I assumed he would be stubborn and difficult to work with. I then went through his resume on a lark and realized that he's like that because he's used to always being right, because he usually is. This instantly moved him up in my mind from "why bother to interview" to "definitely interview (and probably hire immediately)". 
 </Aside>
 
-TODO from jen: interview portion; u probably want to write at least some of what u did cos otherwise it sounds handwavy and may discourage me from applying. or j dont mention it at all
-
 What was the interview process? Traditionally it would likely be a LeetCode thing, but this seemed like a rather uninformative tool. Particularly for the candidates who had made it to the semi-finals of the competition last year, this appeared to be an entirely gratuitous screening step; surely writing and training an AI model is a sufficiently technical screen, right? Additionally, my interns' job scope wasn't merely "code monkey", it was to design and build entire sections of key competition infrastructure,[^4] requiring not just good technical skills but also the ability to make reasonable design decisions when building something entirely greenfield, that I may not have the requisite background to help with either. LeetCode doesn't help me answer that question at all.
 
 [^4]: Obviously a massive ask for an intern, but thankfully our final system only really needs to be production-worthy for two months, so hacky overwrought unmaintainable solutions are fine _so long as it works for just long enough_. 
@@ -114,8 +112,6 @@ For more on the surprise task and solutions we saw, [read the section on Ada's b
 
 # Infrastructure
 So let's talk infrastructure! We overhauled our infrastructure *massively* this year, so there's far too much to talk about. Ada talks about [several interesting infrastructure things in her blog post](https://scallion3008.github.io/til-ai-2025/#semis%2Ffinals-it-infrastructure), so I shall briefly cover some select topics here.
-
-TODO from jen infra - i remember yall had a infra diagram?
 
 ## Code practices
 I did not enforce any coding standards, deeming them unnecessary. My interns (okay, mostly Tianshi) proceeded to enforce some anyway, adding GitHub Actions to run `pylint` and `mypy` checks. I would make a joke here about pre-emptive optimization or overengineering, but they ultimately proved quite useful in some sections of our codebase where we had very granular type annotations set up.
