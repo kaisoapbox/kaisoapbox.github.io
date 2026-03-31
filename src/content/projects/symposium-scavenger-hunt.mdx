@@ -1,0 +1,227 @@
+---
+title: "Symposium 2026 Scavenger Hunt"
+description: "I organized a scavenger hunt! Here's how all the challenges worked."
+heroImage: "/scav_awards.jpg"
+pubDate: "Apr 1 2026"
+---
+
+import angelImage from "../../assets/symposium_scav26/discord_angels.png";
+import kxqImage from "../../assets/symposium_scav26/kingxqueen.jpg";
+import kxqPoster from "../../assets/symposium_scav26/kxq_poster.jpg";
+import transitPoster from "../../assets/symposium_scav26/transit_poster.jpg";
+import vandalImage from "../../assets/symposium_scav26/vandals.png";
+import Aside from "../../components/Aside.jsx";
+import Subscribe from "../../components/ButtondownSubscribe.jsx";
+import Image from "../../components/Image.astro";
+
+Together with some friends, we hosted a scavenger hunt that took place immediately before Day 1 of the [Socratica Symposium](https://symposium.socrati.ca).
+
+<Aside open summary="Silly Stats">
+- 77 signups
+- 21 challenges, 3 ending unsolved
+- 13 silly OAuth options, and 5 real ones
+- 9 laps around the Perimeter Institute
+- 43 pennies awarded
+</Aside>
+
+## Who was involved?
+- Me, obviously
+- [Calvin Liang](https://calvin.sh)
+- [Ray Hua](https://rayhua.ca)
+- [Peter Whiting](https://peterwhiting.me/)
+- [Jen Taruno](https://jentar.uno)
+- Adam Cook
+- [Cindy Won](https://www.youtube.com/@marbledmonsoon), who we roped in literally 2 days before the scavenger hunt started
+
+## What was it?
+We had a simple goal. We wanted to get people to run around the city, make friends, and have a good time before Symposium. 
+
+TODO: talk about custom-built scavenger hunt platform
+
+<Aside summary="Aside: the unnecessarily painful process of allowing all special characters in team names" >
+TODO
+</Aside>
+## Day-of
+TODO
+
+### Play stupid games, win stupid prizes
+Seeing as it was a scavenger hunt, it was only fitting that our prize was equally scavenged. Our winning team received the following:
+- CDs containing an indie rock mixtape Cindy made for her sister
+- Miscellaneous enamel pins
+- Several copies of an out-of-print graphic novel named Cerebus
+- One Life brand exfoliating clay mask
+- A miniature deck of playing cards, "lightly" used
+- Random Asian snacks
+- All contained within a random bowl from Dollarama that was given to us just the day before
+
+But don't worry, we had a cash prize too: 43 pennies, 500 Indonesian Rupiah (worth ~4 cents), and 2 Ukrainian Hryvnia (worth ~6 cents), presented taped to our novelty check. Speaking of which, said novelty check kept trying to roll itself back up again, because it's really meant to be glued flat to a piece of cardboard. As such, we had to take our goofy award ceremony picture of it with someone holding each corner under tension.
+
+## TODO: Learnings
+people will in fact let you put posters in weird locations. Shoutout Jerry from Akatos who thought it was funny.
+
+The challenges I made are probably too hard
+
+Our infra setup is a little too fixed to be easily usable (some kind of CMS or admin panel would be great, instead of having to wait for a build every time you need to change something last minute)
+
+Participants need a map of physical challenge locations so they can tackle each physical cluster together rather than backtracking around
+
+It needs to be clearer which things are final answers, capitalization, spaces, etc. 
+
+## Acknowledgements
+Thanks to Atelier for everything, Chloe-Amelie for making the poster designs that actually looked good, Stella for test-solving some stuff, Socratica for a great time, Princess Cinemas for letting us put a random piece of paper in your poster cases, and the Waterloo Public Library for letting us hide stuff in your books. And to all the participants for making it worth it!
+
+## Every challenge, explained
+Spoilers, obviously.
+
+<Aside summary="Challenge: Angel Numbers, Times, and Points">
+In the Atelier hosts Discord server, our `#random` channel is *full* of angel number times. 
+
+<Image src={angelImage} alt="Representative Discord screenshot of the #random showing many angel number (-esque) times submitted by me, along with a brief suggestion that we integrate this into the scavenger hunt." caption="This, somehow, is actually quite representative of our #random channel."/>
+
+So we knew we had to make this a challenge. Though, what we forgot about when deciding to give angel number points for your angel number time, is that people could just set an alarm for 4:43 and effectively guarantee the highest point value possible. We don't do this at Atelier, because it isn't in the spirit of the random channel angel number. But if points are on the line...
+
+The idea was that if you try to submit at 3:33 and fail, you can always try again later. But if you fail at 4:44, then you're out of luck, you get a zero for the challenge! Thing is, the ability to set an alarm throws off any interesting risk-reward calculations that you would create by not submitting at an earlier time. So maybe it's back to the drawing board again on that idea.
+</Aside>
+<Aside summary="Challenge: Bookworm Loose in the Library">
+Cindy was working on an official scavenger hunt for Symposium, but her idea was shot down. So we roped her in, and asked her if she had puzzle ideas. Shortly after, she came up with this one, and the day before the hunt, she went to the Waterloo Public Library to ask permission to set it up.
+
+The challenge itself was relatively straightforward, essentially just following the trail of relatively obvious book clues along. But it was really cute!
+
+I initially suggested that the final reveal should be that her pet was a BILLY bookcase, but she thought the gag wasn't worth giving up the cute worm. And like, I agree... but it would have been funny...
+</Aside>
+<Aside summary="Challenge: Coffee Run">
+We knew there was going to be a Socratica poster outside the Balzac's location at the Tannery. The question was, what could we hide in it?
+
+We ultimately chose to hide the postal code of Civic Center Park, the location of our award ceremony, "coincidentally" just across from the Symposium venue. The design was only finished the night of the 20th, and the poster only got printed and put up some time after the hunt started, but... well, it worked. 
+
+In retrospect, hiding a postal code was a bad idea for challenge clarity. At least one team asked if they needed to physically go to that postal code and then continue the clue from there.
+</Aside>
+<Aside summary="Challenge: Find The Vandals">
+We were told there were going to be bus shelter ads for Symposium put up around Kitchener/Waterloo. So obviously we had to make "find the bus shelter ads" into a puzzle, the question was just how we were going to clue people to their locations. So the *Lost in Transit* puzzle slotted in perfectly to set that up.
+
+<Image src={vandalImage} alt="One of the Socratica hosts, Nefise, informing me on Slack that one of the bus shelter ads was taken down. The message is dated Mar 19th, two days before the scavenger hunt."/>
+
+Then, two days before the scavenger hunt, we were told one of the bus ads was taken down. It was entirely unclear why this happened too, because Socratica had paid for it to be there! So I had to hurriedly adjust my puzzle to account for this.
+</Aside>
+<Aside summary="Challenge: Give Us Looot">
+The backstory here is that while we were working on Symposium, some users signed up with emails that ended up bouncing. We looked through the bounced emails, and a surprising number were because of one particular typo: adding an additional 'o' to their University of Waterloo email, creating `uwaterlooo.ca`. We immediately checked to see if this domain was registered, because it would be funny, and as it turns out it was not.
+
+So we did what any sensible silly people on the internet would do, and immediately registered the domain. And set it up to redirect to Conestoga College's website, of course.
+
+We also set it up such that any emails sent to a `uwaterlooo.ca` address would be forwarded to the corresponding `uwaterloo.ca` address, with a little addendum indicating that Mr. Goose found their email, hopefully saving people from having their email be entirely non-delivered. I suppose we'll just run this as a public service on behalf of UWaterloo?
+
+But now what challenge can we make with this? We came up with several ideas, all revolving around the idea of feeding the goose some bread. I initially thought of checking if it received emails that had an image file attachment containing a picture of bread, but then Calvin had the idea of people sending us Interac eTransfers. Y'know, "bread". And so it was.
+
+All the funds that we've received through this challenge (all $11.51 of it) are now donations to Atelier. Thanks everyone!
+</Aside>
+<Aside summary="Challenge: Hexagons are the Bestagons">
+Adam really likes hexaflexagons. So he set up this puzzle. It took several iterations to add more affordances to the design to be obvious enough to us test-solving it that it seemed achievably solvable without googling what a hexaflexagon was, at least to us. 
+
+The idea was that with the 6 possible front-back sides that you can get from this style of hexaflexagon, we'd have a bunch of letters that you could assemble together into a word, with their positions indicated by a number. These would each be distributed across the sides, so you would have to see every side in order to assemble the final word answer.
+
+To help participants figure this out, it was set up such that there were colours that you could line up (red with red, green with green, blue with blue) to help you fold your hexaflexagon, along with some fold markings. That didn't seem like enough, so we also had little markings indicating "UNTAPE" (which starts with tape on it) and "TAPE" (which you're meant to tape together). But that still didn't explain the kind of twisty inversion thing you had to do, so we added a little graphic for that too.
+
+Well, despite all these affordances, it was still too complicated, and ultimately only one person solved it. I think one of the problems was that depending on how well you folded it, the letters and numbers wouldn't show up very well. Shoutout to [Santiago](https://x.com/SantiagoDs_001) for solving this one and making us handmaking ~70 pieces of paper feel like it was worth it.
+</Aside>
+<Aside summary="Challenge: Lost in Transit">
+We wanted a transit challenge. And I frequently get lost on transit. So the overall concept kinda wrote itself. Figuring out exactly what the route would be was a very time-consuming challenge, though.
+
+There were several constraints.
+
+TODO: describe route design and several attempts
+
+For the puzzle content itself, I used [Postfully's Fake Text Generator](https://postfully.app/tools/text-message-generator-v2/) to generate the screenshots. There are so many little details; for one, every timestamp was selected to make sense with the transit route they were on. The text bubbles are green rather than blue, because Brits are likely gonna be on Android. Finally, you can even see battery slowly deplete, WiFi/network fluctuate as you walk around and wait at the train station for your friend, and even notifications pop up close to the scavenger hunt time as panicked teammates check in and ask where the British one is. Thanks also to [Shradha Lakshman](https://shradhalakshman.com/) for helping me British-ify the language more!
+
+All that to point you to... the Central ION station, where these posters were *meant* to be greeting you.
+
+<Image src={transitPoster} alt="Jen smirking at and admiring the posters we put up at Central ION station."/>
+
+I say meant to, because we went by later in the day after the hunt and realized that the posters had all already been taken down. It's unclear when this would've happened, but it's likely it was some time mid-afternoon and so no one stood a chance of solving this one. Drat.
+</Aside>
+<Aside summary="Challenge: Mated Pieces">
+I was randomly looking at a map of Kitchener-Waterloo and trying to find locations that would be interesting to put puzzles at. Then I noticed that there was a King Street, and began trying to find other chess piece streets. Upon discovering that there was a Queen Street, that also happened to intersect with King Street, the puzzle idea *immediately* popped into my head: make a chess position in which the best move is King takes Queen (i.e. KxQ) as an abstract clue to go to the intersection of those two streets.
+
+<Image src={kxqImage} alt="The intersection of King and Queen Street, with our 'chess symposium' posters put up on streetlight poles at each street corner."/>
+
+And so after fiddling a bit with the [Lichess board editor](https://lichess.org/), and making a silly little poster to put up at that intersection, the puzzle was ready. Well, almost. We still had to put up the posters on the day itself.
+
+<Image src={kxqPoster} alt="A closeup of one of the posters that we put up on the streetlight poles, with me pointing at it gratuitously."/>
+
+The non-standard notation of KxQ is a little funky, so I'm very glad people got this one. 
+</Aside>
+<Aside summary="Challenge: no faIR!">
+Some of the puzzles involved us dealing with some physical hardware in the world, and this was one of them.
+
+TODO
+</Aside>
+<Aside summary="Challenge: no more countin' sheep">
+One of the puzzles that remained unsolved. I was kinda heartbroken, because it seemed quite clever.
+
+We set up the puzzle initially at a distance, and saw pictures of the mural online. Using [Calvin's Dot Counter tool](https://calvin.sh/tools/dot-counter/), I counted 8 stars and a couple things which potentially could have been stars, but the picture quality was too grainy to tell. 
+
+Then Stella tried her test-solved it, and got the answer without ever looking at murals. I asked her how, and she said she counted the number of "stars" in the lyrics of Counting Stars. And I immediately concluded I had to fudge the numbers such that there would have to be more than 8 stars. So I added a little blurb at the bottom that said that I'm an astronomy nerd, and thus the sun counts as a star.
+
+So imagine my surprise when we went to the mural and discovered that there were 16 stars (at *least*) on the mural. We had only counted HALF of them initially!
+
+Well, it turns out that it was very hard to count all the stars. At least one team tried, and apparently missed at least half of them as well.
+</Aside>
+<Aside summary="Challenge: Rock Out">
+Some of the puzzles involved us dealing with some physical hardware in the world, and this was one of them.
+
+Fake rock with an RFID chip inside. TODO: elaborate
+</Aside>
+<Aside summary="Challenge: Save The Castle">
+We had a shortlist of Kitchener/Waterloo businesses that we wanted to see if we could stick something into at the beginning. [Princess Cinemas]() was high on our list because the Socratica folks were already working with them.
+
+One day, while thinking about what it would look like, the muse brought forth the phrase "I'm sorry, Mario, but your princess is in another castle!". This spark of inspiration said that I must hide the castle in the princess, an inversion of the princess trope. 
+
+So, late night before the hunt, Jen created the graphics and story arc. We printed them the next day and got to stick them into one of the poster cases in the lobby (thanks Sophie!).
+</Aside>
+<Aside summary="Challenge: Send Geese Please">
+Send a goose picture. 'nuff said.
+
+In the interest of automation, we didn't want to actually have to evaluate all the pictures sent our way. So we set it up such that this would query ChatGPT with the picture and ask if it contains a goose. 
+
+There is also a goose statue on the UWaterloo campus. In case people decided to be funny and take a picture of that instead, we decided to handle this edge case by explicitly allowing goose statues as well in our prompt. Hehe. 
+</Aside>
+<Aside summary="Challenge: SOS">
+We knew that in the city of Waterloo, we had to do something related to ABBA. I spent a long time scratching my head figuring out what I wanted this to look like. Someone proposed maybe it could involve a concert date that ABBA played in Waterloo, but it appears they never actually played in Waterloo, either Ontario or Belgium. Though, there are some tribute bands that come by every now and then; on January 24th 2026, [ABBAMANIA](https://centreinthesquare.com/event/abbamania-with-night-fever/) played a show at the Day 1 Symposium venue itself! A neat observation, but I just couldn't figure out how I could make this work, so I shelved it.
+
+Separately, I had the idea of making a puzzle embedded within a calendar file, and you'd have to leaf through the calendar entries to piece together the puzzle. But then... what would go in the calendar entries? What do you put there?
+
+A week or two later, it clicked: the name ABBAMANIA is clearly that of a disease, a clinical obsession with ABBA; what if we combine this calendar challenge idea with the ABBA challenge idea together, and we make it trying to identify how/where this person managed to contract ABBAMANIA? And thus, the calendar came together, and in one session at [Treehouse](https://treehouse.socrati.ca), I fleshed out the entire puzzle.
+
+During her test solve, Stella actually accidentally got the answer without identifying the underlying link, which convinced me that the puzzle was easy enough. Well, in retrospect, I think I should've made it clearer that it was a fictional disease, as people kept trying "ABBA" as in Anti-brush border antibody (ABBA) disease. I could've probably also made it clearer that these events are meant to represent real events happening in real places. Oh well.
+</Aside>
+<Aside summary="Challenge: Unhidden Figures">
+One of the puzzles that remained unsolved, but this one was no surprise. It was always a bit of a stretch.
+
+TODO
+</Aside>
+<Aside summary="Challenge: Investigate the Rogue Wi-Fi">
+Some of the puzzles involved us dealing with some physical hardware in the world, and this was one of them.
+
+TODO
+</Aside>
+<Aside summary="Challenges: Where's Calvin? and Feed Calvin">
+Calvin was developing the [main Symposium website](https://symposium.socrati.ca), so he knew immediately he had to hide himself somewhere. And there was already a picture which had him in the background, so it was easy to do so.
+
+And if they were finding him digitally, it only made sense to then go on to find him physically too. But what to do when you find Calvin? He quickly concluded that participants should feed him, which was funny and hopefully not too annoying to do.
+</Aside>
+<Aside summary="Challenge: Follow Your Heart">
+One day we were given the idea to do an orienteering challenge at [Atelier](https://atelier.socrati.ca). I wanted the challenge to look like a compass needle, which would spin to point at a strange and amusing location. We eventually settled on Lazeez, for the UWaterloo memes.
+
+TODO
+</Aside>
+<Aside summary="Challenge: Innovator's phrase?">
+I made a crossword. This final version technically violates some crossword rules, which I hope wasn't too bad.
+
+TODO talk about previous versions
+</Aside>
+<Aside summary="Challenge: Perimeter's Perimeter">
+This one is pretty self-explanatory. We saw the name Perimeter Institute, and went "huh, that feels like it could be interesting." It was a wacky building, so initially it was the focus of the counting challenge which eventually became *no more countin' sheep*. But it became obvious we should just get people to walk the perimeter of it instead. So Ray wrote a bunch of code for this, and then we tested it once we flew into Waterloo.
+
+Turns out, it didn't work because Ray's code assumed you could get all the way up to the building, which you really couldn't do thanks to some no trespassing signs, sloped roofs, and patches of grass covered in goose poop. So we had to repeatedly tweak some parameters to allow for more generous distances from the building to still count. And each time we tweaked it, I would run a lap around the building to make sure it would still trigger.
+
+We ended up testing this late at night, and had a run-in with building security confusedly trying to figure out what I was doing. Thankfully, they didn't do anything to stop me as I ran several kilometers around their building.
+</Aside>

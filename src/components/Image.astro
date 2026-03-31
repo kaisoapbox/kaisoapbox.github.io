@@ -1,5 +1,5 @@
 ---
-import { Image as AstroImage } from "astro:assets";
+import { Picture as AstroImage } from "astro:assets";
 const { src, alt, width, height, caption } = Astro.props;
 ---
 
@@ -7,10 +7,11 @@ const { src, alt, width, height, caption } = Astro.props;
   <figure>
     <AstroImage
       src={src || ""}
+      formats={["avif", "webp"]}
       width={width || 700}
       height={height || 700}
       alt={alt || ""}
     />
-    <figcaption>{caption || ""}</figcaption>
+    {caption && <figcaption>{caption}</figcaption>}
   </figure>
 </div>
