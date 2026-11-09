@@ -1,6 +1,6 @@
-import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
+import { defineConfig } from "astro/config";
 
 import react from "@astrojs/react";
 import { rehypeSidenotes } from "./src/plugins/sidenotes";
@@ -17,5 +17,6 @@ export default defineConfig({
   ],
   redirects: {
     "/faa_biographical_assessment": "/projects/faa_biographical_assessment/",
+    "/projects/faa_biograp": "/projects/faa_biographical_assessment/",
   },
 });
